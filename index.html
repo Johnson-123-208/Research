@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passive Mental Health Monitoring | Naarsoft Tech Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        /* Glossy shine animation overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none; /* so it won’t block clicks */
+  z-index: 9999; /* sits on top */
+  animation: glossyMove 8s linear infinite;
+}
+
+/* Animation moves the shine across the page */
+@keyframes glossyMove {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(50%) rotate(0deg);
+  }
+}
+
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Glass morphism styles */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Background sections */
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .data-flow-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .sources-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .api-section {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .download-section {
+            height: 100vh;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { width: 60px; height: 60px; top: 60%; right: 15%; animation-delay: 2s; }
+        .floating-element:nth-child(3) { width: 100px; height: 100px; bottom: 30%; left: 20%; animation-delay: 4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+            transform: translateY(-2px);
+        }
+
+        /* Content containers */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero content */
+        .hero-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: slideUp 1s ease 0.5s forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0;
+            animation: slideUp 1s ease 1s forwards;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            opacity: 0;
+            animation: slideUp 1s ease 1.5s forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section titles */
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 60px;
+            color: white;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Data flow visualization */
+        .flow-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .flow-card {
+            padding: 30px;
+            text-align: center;
+            color: white;
+            transform: translateY(50px);
+            opacity: 0;
+            animation: cardSlideUp 0.8s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .flow-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .flow-card:nth-child(1) { animation-delay: 0.2s; }
+        .flow-card:nth-child(2) { animation-delay: 0.4s; }
+        .flow-card:nth-child(3) { animation-delay: 0.6s; }
+        .flow-card:nth-child(4) { animation-delay: 0.8s; }
+
+        @keyframes cardSlideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .flow-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .flow-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .flow-description {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        /* Data sources grid */
+        .sources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .source-card {
+            padding: 30px;
+            color: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .source-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .source-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .price-tag {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .free { background: #4caf50; }
+        .paid { background: #ff9800; }
+        .premium { background: #e91e63; }
+
+        .source-details {
+            margin-bottom: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .feature-list li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        /* API Code sections */
+        .api-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+            gap: 30px;
+        }
+
+        .api-card {
+            padding: 30px;
+            color: white;
+        }
+        /* Custom slider style */
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  transition: background 0.3s;
+  margin-top: 8px;
+}
+
+.slider:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4cafef;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #00e676;
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #4cafef;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+
+        .api-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .copy-btn:hover {
+            background: #45a049;
+        }
+
+        /* Download section */
+        .download-content {
+            text-align: center;
+            color: white;
+        }
+
+        .download-title {
+            font-size: 3rem;
+            margin-bottom: 30px;
+        }
+
+        .download-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Correlation diagram */
+        .correlation-diagram {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .diagram-title {
+            text-align: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-subtitle { font-size: 1.2rem; }
+            .section-title { font-size: 2rem; }
+            nav { padding: 15px 20px; }
+            .nav-links { display: none; }
+            .container { padding: 0 15px; }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">🧠 Naarsoft Tech Services</a>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#data-flow">Data Flow</a></li>
+                <li><a href="#sources">Data Sources</a></li>
+                <li><a href="#api">API Integration</a></li>
+                <li><a href="#mental-state">Mental Estimator</a></li>
+                <li><a href="#download">Download SRS</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero-section">
+        <div class="bg-animation">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Passive Mental Health Monitoring</h1>
+                <h2 class="hero-subtitle">Advanced AI-Driven Healthcare Solutions</h2>
+                <p class="hero-description">
+                    Revolutionizing mental healthcare through continuous, non-intrusive monitoring using smartphone and wearable sensors. 
+                    Our system combines cutting-edge machine learning with passive data collection to provide early detection and 
+                    continuous monitoring of mood states, supporting better clinical outcomes.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Flow Section -->
+    <section id="data-flow" class="data-flow-section">
+        <div class="bg-animation">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Complete Data Flow Process</h2>
+            
+            <div class="flow-container">
+                <div class="flow-card glass">
+                    <span class="flow-icon">📱</span>
+                    <h3 class="flow-title">Data Collection</h3>
+                    <p class="flow-description">
+                        Continuous passive sensing from smartphones and wearables including heart rate, accelerometer, 
+                        GPS, sleep patterns, and phone usage. Data collected at various frequencies (1Hz-daily) 
+                        with 95% uptime requirement.
+                    </p>
+                </div>
+                
+                <div class="flow-card glass">
+                    <span class="flow-icon">⚡</span>
+                    <h3 class="flow-title">Edge Processing</h3>
+                    <p class="flow-description">
+                        Real-time preprocessing on device including noise reduction, outlier detection, 
+                        feature extraction (44 behavioral features), and privacy protection through 
+                        differential privacy (ε=1.0).
+                    </p>
+                </div>
+                
+                <div class="flow-card glass">
+                    <span class="flow-icon">🧠</span>
+                    <h3 class="flow-title">ML Analysis</h3>
+                    <p class="flow-description">
+                        CNN-LSTM models (92.16% accuracy) analyze temporal patterns, Random Forest for 
+                        interpretability, and XGBoost for performance. Personalized models after 
+                        2-week calibration period.
+                    </p>
+                </div>
+                
+                <div class="flow-card glass">
+                    <span class="flow-icon">🏥</span>
+                    <h3 class="flow-title">Clinical Interface</h3>
+                    <p class="flow-description">
+                        Healthcare provider dashboard with real-time alerts, longitudinal trends, 
+                        risk stratification, and intervention recommendations. HL7 FHIR integration 
+                        for seamless EHR connectivity.
+                    </p>
+                </div>
+            </div>
+
+            <div class="correlation-diagram glass">
+                <h3 class="diagram-title">Data Correlation Analysis</h3>
+                <div id="correlationChart" style="width: 100%; height: 400px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Sources Section -->
+    <section id="sources" class="sources-section">
+        <div class="bg-animation">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Passive Data Sources & Pricing</h2>
+            
+            <div class="sources-grid">
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Google Fit API</h3>
+                        <span class="price-tag free">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Steps, heart rate, sleep, physical activity</p>
+                        <p><strong>Rate Limits:</strong> 1000 requests/day</p>
+                        <p><strong>Accuracy:</strong> 85-95% for step counting</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Real-time activity tracking</li>
+                        <li>Historical data access (up to 1 year)</li>
+                        <li>Multiple device integration</li>
+                        <li>OAuth 2.0 authentication</li>
+                    </ul>
+                </div>
+
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Apple HealthKit</h3>
+                        <span class="price-tag free">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Heart rate, sleep, activity, mindfulness</p>
+                        <p><strong>Rate Limits:</strong> No explicit limits</p>
+                        <p><strong>Accuracy:</strong> 90-98% for biometric data</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Comprehensive health metrics</li>
+                        <li>Privacy-first architecture</li>
+                        <li>Clinical-grade accuracy</li>
+                        <li>iOS ecosystem integration</li>
+                    </ul>
+                </div>
+
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Fitbit Web API</h3>
+                        <span class="price-tag paid">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Heart rate, sleep stages, activity, stress</p>
+                        <p><strong>Rate Limits:</strong> 150 requests/hour</p>
+                        <p><strong>Accuracy:</strong> 95-99% for heart rate</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Detailed sleep stage analysis</li>
+                        <li>Continuous heart rate monitoring</li>
+                        <li>Stress and recovery metrics</li>
+                        <li>Social and community features</li>
+                    </ul>
+                </div>
+
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Garmin Connect IQ</h3>
+                        <span class="price-tag paid">Free, enterprise approval required</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Advanced metrics, sleep, stress, recovery</p>
+                        <p><strong>Rate Limits:</strong> 100 requests/hour</p>
+                        <p><strong>Accuracy:</strong> 98-99% for fitness metrics</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Professional-grade sensors</li>
+                        <li>Body battery energy monitoring</li>
+                        <li>Advanced sleep tracking</li>
+                        <li>Stress and recovery analytics</li>
+                    </ul>
+                </div>
+
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Oura Ring API</h3>
+                        <span class="price-tag premium">FREE (requires Oura Membership $5.99/mo for users)</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Sleep quality, HRV, temperature, readiness</p>
+                        <p><strong>Rate Limits:</strong> 5000 requests/day</p>
+                        <p><strong>Accuracy:</strong> 99% for sleep tracking</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Research-grade sleep analysis</li>
+                        <li>Heart rate variability</li>
+                        <li>Body temperature trends</li>
+                        <li>Readiness and recovery scores</li>
+                    </ul>
+                </div>
+
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Polar API</h3>
+                        <span class="price-tag paid">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Heart rate, training load, recovery</p>
+                        <p><strong>Rate Limits:</strong> 1000 requests/day</p>
+                        <p><strong>Accuracy:</strong> 99.6% for ECG-accurate HR</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>ECG-accurate heart rate</li>
+                        <li>Training load analytics</li>
+                        <li>Recovery recommendations</li>
+                        <li>Professional athlete grade</li>
+                    </ul>
+                </div>
+                                <!-- Samsung Health API -->
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Samsung Health API</h3>
+                        <span class="price-tag free">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Steps, heart rate, sleep, workouts, nutrition</p>
+                        <p><strong>Rate Limits:</strong> No public limits (Samsung approval required)</p>
+                        <p><strong>Accuracy:</strong> Comparable to Google Fit (90–95%)</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Deep Android ecosystem integration</li>
+                        <li>Comprehensive health metrics</li>
+                        <li>Multi-device & smartwatch support</li>
+                        <li>User consent required</li>
+                    </ul>
+                </div>
+
+                <!-- Whoop API -->
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Whoop API</h3>
+                        <span class="price-tag premium">Enterprise</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Recovery, HRV, strain, sleep performance</p>
+                        <p><strong>Rate Limits:</strong> Varies (partner access required)</p>
+                        <p><strong>Accuracy:</strong> 98–99% for HRV and recovery metrics</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Athlete performance focus</li>
+                        <li>Recovery and strain analytics</li>
+                        <li>High-resolution HRV tracking</li>
+                        <li>Enterprise access agreements</li>
+                    </ul>
+                </div>
+
+                <!-- Withings API -->
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Withings API</h3>
+                        <span class="price-tag free">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Weight, body composition, sleep, heart rate</p>
+                        <p><strong>Rate Limits:</strong> 200 requests/hour</p>
+                        <p><strong>Accuracy:</strong> Medical-grade scale data</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Smart scales & sleep mats integration</li>
+                        <li>Body composition analysis</li>
+                        <li>Medical-grade accuracy</li>
+                        <li>OAuth 2.0 access</li>
+                    </ul>
+                </div>
+
+                <!-- Strava API -->
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Strava API</h3>
+                        <span class="price-tag free">FREE</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> GPS workouts, cycling, running, heart rate</p>
+                        <p><strong>Rate Limits:</strong> 100 requests per 15 min, 1,000/day</p>
+                        <p><strong>Accuracy:</strong> GPS device dependent (95–99%)</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Endurance sports focus</li>
+                        <li>Strong community features</li>
+                        <li>Route and segment tracking</li>
+                        <li>OAuth 2.0 authentication</li>
+                    </ul>
+                </div>
+
+                <!-- Dexcom API -->
+                <div class="source-card glass-dark">
+                    <div class="source-header">
+                        <h3 class="source-name">Dexcom API</h3>
+                        <span class="price-tag premium">Clinical</span>
+                    </div>
+                    <div class="source-details">
+                        <p><strong>Data Types:</strong> Continuous glucose monitoring (CGM)</p>
+                        <p><strong>Rate Limits:</strong> 300 requests/hour</p>
+                        <p><strong>Accuracy:</strong> FDA-approved CGM accuracy (MARD ~9%)</p>
+                    </div>
+                    <ul class="feature-list">
+                        <li>Diabetes management data</li>
+                        <li>Real-time glucose readings</li>
+                        <li>Regulatory compliance</li>
+                        <li>Patient consent required</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- API Integration Section -->
+    <section id="api" class="api-section">
+        <div class="bg-animation">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">API Integration Code Examples</h2>
+            
+            <div class="api-container">
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Google Fit API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Getting API Key:</strong><br>
+                        1. Go to Google Cloud Console<br>
+                        2. Create/Select project<br>
+                        3. Enable Fitness API<br>
+                        4. Create credentials (OAuth 2.0)
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('googlefit-code')">Copy</button>
+                        <pre id="googlefit-code">import requests
+from google.oauth2.credentials import Credentials
+
+# Authentication setup
+def get_google_fit_data(access_token):
+    headers = {
+        'Authorization': f'Bearer {access_token}',
+        'Content-Type': 'application/json'
+    }
+    
+    # Get step count data
+    url = 'https://www.googleapis.com/fitness/v1/users/me/dataSources'
+    response = requests.get(url, headers=headers)
+    
+    # Get aggregated data
+    agg_url = 'https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate'
+    payload = {
+        "aggregateBy": [{
+            "dataTypeName": "com.google.step_count.delta",
+            "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
+        }],
+        "bucketByTime": {"durationMillis": 86400000},  # 1 day
+        "startTimeMillis": 1640995200000,
+        "endTimeMillis": 1641081600000
+    }
+    
+    agg_response = requests.post(agg_url, json=payload, headers=headers)
+    return agg_response.json()
+
+# Usage
+data = get_google_fit_data('YOUR_ACCESS_TOKEN')</pre>
+                    </div>
+                </div>
+
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Apple HealthKit (iOS)</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Enable HealthKit capability in Xcode<br>
+                        2. Add usage description in Info.plist<br>
+                        3. Request permissions from user<br>
+                        4. Query health data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('healthkit-code')">Copy</button>
+                        <pre id="healthkit-code">import HealthKit
+
+class HealthKitManager {
+    let healthStore = HKHealthStore()
+    
+    func requestPermissions() {
+        let healthTypes: Set = [
+            HKObjectType.quantityType(forIdentifier: .heartRate)!,
+            HKObjectType.quantityType(forIdentifier: .stepCount)!,
+            HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
+        ]
+        
+        healthStore.requestAuthorization(toShare: nil, read: healthTypes) { success, error in
+            if success {
+                self.fetchHeartRateData()
+            }
+        }
+    }
+    
+    func fetchHeartRateData() {
+        let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
+        let query = HKSampleQuery(sampleType: heartRateType,
+                                 predicate: nil,
+                                 limit: 100,
+                                 sortDescriptors: nil) { query, samples, error in
+            guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
+            
+            for sample in heartRateSamples {
+                let heartRate = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+                print("Heart Rate: \(heartRate) BPM at \(sample.startDate)")
+            }
+        }
+        healthStore.execute(query)
+    }
+}</pre>
+                    </div>
+                </div>
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Samsung Health API (Android)</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Register your app with Samsung Health SDK<br>
+                        2. Add required permissions in AndroidManifest.xml<br>
+                        3. Connect to HealthDataStore<br>
+                        4. Query health data (steps, HR, sleep)
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('samsung-code')">Copy</button>
+                        <pre id="samsung-code">import com.samsung.android.sdk.healthdata.*
+                
+                class SamsungHealthManager(context: Context) {
+                    private val mStore: HealthDataStore = HealthDataStore(context, object : HealthDataStore.ConnectionListener {
+                        override fun onConnected() {
+                            println("Samsung Health connected")
+                        }
+                        override fun onConnectionFailed(error: HealthConnectionErrorResult) {
+                            println("Connection failed: ${error.message}")
+                        }
+                        override fun onDisconnected() {}
+                    })
+                
+                    init {
+                        mStore.connectService()
+                    }
+                
+                    fun readSteps() {
+                        val dataType = HealthConstants.StepCount.HEALTH_DATA_TYPE
+                        val resolver = HealthDataResolver(mStore, null)
+                        val request = HealthDataResolver.ReadRequest.Builder()
+                            .setDataType(dataType)
+                            .build()
+                        val result = resolver.read(request)
+                        result.await().use { res ->
+                            res.iterator().forEach {
+                                println("Steps: ${it.getInt(HealthConstants.StepCount.COUNT)}")
+                            }
+                        }
+                    }
+                }</pre>
+                    </div>
+                </div>
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Whoop API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Apply for developer access at developer.whoop.com<br>
+                        2. Get OAuth 2.0 client credentials<br>
+                        3. Request user authorization<br>
+                        4. Query recovery, sleep, and strain data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('whoop-code')">Copy</button>
+                        <pre id="whoop-code">import requests
+                
+                class WhoopAPI:
+                    def __init__(self, access_token):
+                        self.base_url = "https://api.prod.whoop.com/developer"
+                        self.headers = {"Authorization": f"Bearer {access_token}"}
+                
+                    def get_recovery(self, start, end):
+                        url = f"{self.base_url}/v1/recovery?start={start}&end={end}"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                    def get_sleep(self, start, end):
+                        url = f"{self.base_url}/v1/sleep?start={start}&end={end}"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                # Usage
+                whoop = WhoopAPI("YOUR_ACCESS_TOKEN")
+                print(whoop.get_recovery("2025-01-01", "2025-01-07"))</pre>
+                    </div>
+                </div>
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Withings API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Register your app at developer.withings.com<br>
+                        2. Implement OAuth 2.0 flow<br>
+                        3. Request user authorization<br>
+                        4. Access measurements and sleep data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('withings-code')">Copy</button>
+                        <pre id="withings-code">import requests
+                
+                class WithingsAPI:
+                    def __init__(self, access_token):
+                        self.base_url = "https://wbsapi.withings.net"
+                        self.headers = {"Authorization": f"Bearer {access_token}"}
+                
+                    def get_measurements(self):
+                        url = f"{self.base_url}/measure?action=getmeas"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                    def get_sleep(self, start, end):
+                        url = f"{self.base_url}/v2/sleep"
+                        params = {"action": "get", "startdate": start, "enddate": end}
+                        response = requests.get(url, headers=self.headers, params=params)
+                        return response.json()
+                
+                # Usage
+                withings = WithingsAPI("YOUR_ACCESS_TOKEN")
+                print(withings.get_measurements())</pre>
+                    </div>
+                </div>
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Strava API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Register app at developers.strava.com<br>
+                        2. Obtain Client ID & Secret<br>
+                        3. Implement OAuth 2.0 flow<br>
+                        4. Fetch athlete profile and activities
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('strava-code')">Copy</button>
+                        <pre id="strava-code">import requests
+                
+                class StravaAPI:
+                    def __init__(self, access_token):
+                        self.base_url = "https://www.strava.com/api/v3"
+                        self.headers = {"Authorization": f"Bearer {access_token}"}
+                
+                    def get_activities(self, per_page=10):
+                        url = f"{self.base_url}/athlete/activities?per_page={per_page}"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                    def get_profile(self):
+                        url = f"{self.base_url}/athlete"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                # Usage
+                strava = StravaAPI("YOUR_ACCESS_TOKEN")
+                print(strava.get_activities())</pre>
+                    </div>
+                </div>
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Dexcom API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Setup Process:</strong><br>
+                        1. Apply for developer account at developer.dexcom.com<br>
+                        2. Obtain OAuth 2.0 credentials<br>
+                        3. Use sandbox API for testing<br>
+                        4. Query CGM glucose and device data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('dexcom-code')">Copy</button>
+                        <pre id="dexcom-code">import requests
+                
+                class DexcomAPI:
+                    def __init__(self, access_token):
+                        self.base_url = "https://sandbox-api.dexcom.com/v2"
+                        self.headers = {"Authorization": f"Bearer {access_token}"}
+                
+                    def get_glucose_data(self, start, end):
+                        url = f"{self.base_url}/users/self/egvs?startDate={start}&endDate={end}"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                    def get_devices(self):
+                        url = f"{self.base_url}/users/self/devices"
+                        response = requests.get(url, headers=self.headers)
+                        return response.json()
+                
+                # Usage
+                dexcom = DexcomAPI("YOUR_ACCESS_TOKEN")
+                print(dexcom.get_glucose_data("2025-01-01T00:00:00", "2025-01-02T00:00:00"))</pre>
+                    </div>
+                </div>
+                
+                
+                
+                
+
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Fitbit Web API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Getting API Access:</strong><br>
+                        1. Register app at dev.fitbit.com<br>
+                        2. Get Client ID and Secret<br>
+                        3. Implement OAuth 2.0 flow<br>
+                        4. Request user authorization
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('fitbit-code')">Copy</button>
+                        <pre id="fitbit-code">import requests
+import base64
+from datetime import datetime
+
+class FitbitAPI:
+    def __init__(self, client_id, client_secret):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.base_url = 'https://api.fitbit.com/1'
+    
+    def get_access_token(self, auth_code):
+        url = 'https://api.fitbit.com/oauth2/token'
+        headers = {
+            'Authorization': f'Basic {base64.b64encode(f"{self.client_id}:{self.client_secret}".encode()).decode()}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        data = {
+            'client_id': self.client_id,
+            'grant_type': 'authorization_code',
+            'code': auth_code,
+            'redirect_uri': 'YOUR_REDIRECT_URI'
+        }
+        response = requests.post(url, headers=headers, data=data)
+        return response.json()
+    
+    def get_heart_rate_data(self, access_token, date='today'):
+        url = f'{self.base_url}/user/-/activities/heart/date/{date}/1d/1min.json'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        response = requests.get(url, headers=headers)
+        return response.json()
+    
+    def get_sleep_data(self, access_token, date='today'):
+        url = f'{self.base_url}/user/-/sleep/date/{date}.json'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        response = requests.get(url, headers=headers)
+        return response.json()
+
+# Usage
+fitbit = FitbitAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET')
+heart_data = fitbit.get_heart_rate_data('ACCESS_TOKEN')
+sleep_data = fitbit.get_sleep_data('ACCESS_TOKEN')</pre>
+                    </div>
+                </div>
+
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Oura Ring API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Getting API Access:</strong><br>
+                        1. Apply for developer access at cloud.ouraring.com<br>
+                        2. Get Personal Access Token<br>
+                        3. Use OAuth 2.0 for production apps<br>
+                        4. Access comprehensive sleep/recovery data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('oura-code')">Copy</button>
+                        <pre id="oura-code">import requests
+from datetime import datetime, timedelta
+
+class OuraAPI:
+    def __init__(self, access_token):
+        self.access_token = access_token
+        self.base_url = 'https://api.ouraring.com/v2'
+        self.headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+    
+    def get_sleep_data(self, start_date=None, end_date=None):
+        if not start_date:
+            start_date = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
+        if not end_date:
+            end_date = datetime.now().strftime('%Y-%m-%d')
+        
+        url = f'{self.base_url}/usercollection/sleep'
+        params = {
+            'start_date': start_date,
+            'end_date': end_date
+        }
+        response = requests.get(url, headers=self.headers, params=params)
+        return response.json()
+    
+    def get_readiness_data(self, start_date=None, end_date=None):
+        if not start_date:
+            start_date = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
+        
+        url = f'{self.base_url}/usercollection/daily_readiness'
+        params = {
+            'start_date': start_date,
+            'end_date': end_date
+        }
+        response = requests.get(url, headers=self.headers, params=params)
+        return response.json()
+    
+    def get_hrv_data(self, start_date=None, end_date=None):
+        url = f'{self.base_url}/usercollection/heartrate'
+        params = {
+            'start_datetime': f'{start_date}T00:00:00.000Z',
+            'end_datetime': f'{end_date}T23:59:59.999Z'
+        }
+        response = requests.get(url, headers=self.headers, params=params)
+        return response.json()
+
+# Usage
+oura = OuraAPI('YOUR_ACCESS_TOKEN')
+sleep_data = oura.get_sleep_data()
+readiness_data = oura.get_readiness_data()
+hrv_data = oura.get_hrv_data('2024-01-01', '2024-01-07')</pre>
+                    </div>
+                </div>
+
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Garmin Connect IQ</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Getting API Access:</strong><br>
+                        1. Register at developer.garmin.com<br>
+                        2. Create application and get credentials<br>
+                        3. Implement OAuth 1.0a flow<br>
+                        4. Access wellness and activity data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('garmin-code')">Copy</button>
+                        <pre id="garmin-code">import requests
+import hashlib
+import hmac
+import base64
+from urllib.parse import quote
+import time
+import random
+
+class GarminConnectAPI:
+    def __init__(self, consumer_key, consumer_secret):
+        self.consumer_key = consumer_key
+        self.consumer_secret = consumer_secret
+        self.base_url = 'https://apis.garmin.com/wellness-api/rest'
+    
+    def generate_oauth_signature(self, method, url, params, token_secret=''):
+        # OAuth 1.0a signature generation
+        sorted_params = sorted(params.items())
+        param_string = '&'.join([f'{k}={v}' for k, v in sorted_params])
+        
+        base_string = f'{method}&{quote(url, safe="")}&{quote(param_string, safe="")}'
+        signing_key = f'{quote(self.consumer_secret, safe="")}&{quote(token_secret, safe="")}'
+        
+        signature = base64.b64encode(
+            hmac.new(signing_key.encode(), base_string.encode(), hashlib.sha1).digest()
+        ).decode()
+        
+        return signature
+    
+    def get_user_summary(self, access_token, token_secret, date):
+        url = f'{self.base_url}/dailies'
+        
+        oauth_params = {
+            'oauth_consumer_key': self.consumer_key,
+            'oauth_token': access_token,
+            'oauth_signature_method': 'HMAC-SHA1',
+            'oauth_timestamp': str(int(time.time())),
+            'oauth_nonce': str(random.randint(1000000, 9999999)),
+            'oauth_version': '1.0',
+            'calendarDate': date
+        }
+        
+        signature = self.generate_oauth_signature('GET', url, oauth_params, token_secret)
+        oauth_params['oauth_signature'] = signature
+        
+        response = requests.get(url, params=oauth_params)
+        return response.json()
+    
+    def get_activities(self, access_token, token_secret, start_date, end_date):
+        url = f'{self.base_url}/activities'
+        
+        oauth_params = {
+            'oauth_consumer_key': self.consumer_key,
+            'oauth_token': access_token,
+            'oauth_signature_method': 'HMAC-SHA1',
+            'oauth_timestamp': str(int(time.time())),
+            'oauth_nonce': str(random.randint(1000000, 9999999)),
+            'oauth_version': '1.0',
+            'startDate': start_date,
+            'endDate': end_date
+        }
+        
+        signature = self.generate_oauth_signature('GET', url, oauth_params, token_secret)
+        oauth_params['oauth_signature'] = signature
+        
+        response = requests.get(url, params=oauth_params)
+        return response.json()
+
+# Usage
+garmin = GarminConnectAPI('YOUR_CONSUMER_KEY', 'YOUR_CONSUMER_SECRET')
+summary = garmin.get_user_summary('ACCESS_TOKEN', 'TOKEN_SECRET', '2024-01-01')</pre>
+                    </div>
+                </div>
+
+                <div class="api-card glass-dark">
+                    <h3 class="api-title">Polar API</h3>
+                    <p style="color: white; margin-bottom: 15px;">
+                        <strong>Getting API Access:</strong><br>
+                        1. Register at www.polar.com/accesslink-api<br>
+                        2. Get client credentials<br>
+                        3. Implement OAuth 2.0 authorization flow<br>
+                        4. Access training and wellness data
+                    </p>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode('polar-code')">Copy</button>
+                        <pre id="polar-code">import requests
+import base64
+from datetime import datetime
+
+class PolarAccessLinkAPI:
+    def __init__(self, client_id, client_secret):
+        self.client_id = client_id
+        self.client_secret = client_secret
+        self.base_url = 'https://www.polaraccesslink.com/v3'
+    
+    def get_access_token(self, authorization_code):
+        url = 'https://polarremote.com/v2/oauth2/token'
+        
+        auth_header = base64.b64encode(f'{self.client_id}:{self.client_secret}'.encode()).decode()
+        headers = {
+            'Authorization': f'Basic {auth_header}',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        
+        data = {
+            'grant_type': 'authorization_code',
+            'code': authorization_code
+        }
+        
+        response = requests.post(url, headers=headers, data=data)
+        return response.json()
+    
+    def register_user(self, access_token, member_id):
+        url = f'{self.base_url}/users'
+        headers = {
+            'Authorization': f'Bearer {access_token}',
+            'Content-Type': 'application/json'
+        }
+        data = {'member-id': member_id}
+        
+        response = requests.post(url, headers=headers, json=data)
+        return response.status_code == 200
+    
+    def get_available_data(self, access_token, user_id):
+        url = f'{self.base_url}/users/{user_id}/exercise-transactions'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        
+        response = requests.get(url, headers=headers)
+        return response.json()
+    
+    def get_exercise_summary(self, access_token, user_id, transaction_id):
+        url = f'{self.base_url}/users/{user_id}/exercise-transactions/{transaction_id}'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        
+        response = requests.get(url, headers=headers)
+        return response.json()
+    
+    def get_daily_activity(self, access_token, user_id, date):
+        url = f'{self.base_url}/users/{user_id}/activity-transactions'
+        headers = {'Authorization': f'Bearer {access_token}'}
+        
+        response = requests.get(url, headers=headers)
+        return response.json()
+
+# Usage
+polar = PolarAccessLinkAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET')
+token_data = polar.get_access_token('AUTHORIZATION_CODE')
+access_token = token_data['access_token']
+user_registered = polar.register_user(access_token, 'MEMBER_ID')</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Mental State Estimator -->
+<!-- Full Page Width Mental State Estimator -->
+<section id="mental-state" 
+    style="width: 100%; min-height: 100vh; padding: 80px 20px; 
+           background: linear-gradient(135deg, #fc00ca, #ff9800); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+
+    <div style="max-width: 1000px; width: 100%; text-align: center;">
+        <h2 style="color: #fff; margin-bottom: 20px; font-size: 36px; font-weight: bold;">
+            🧠 Mental State Estimator
+        </h2>
+        <p style="color: #eee; margin-bottom: 40px; font-size: 18px;">
+            Adjust the sliders below to simulate changes in passive data and see how it affects your mental state.
+        </p>
+
+        <!-- Sliders -->
+        <div class="slider-container" style="margin-top: 20px; text-align: left;">
+            <label style="color: white;">Sleep Hours (ideal 7–9 hrs): <span id="sleep-val">7</span> hrs</label>
+            <input type="range" id="sleep" min="3" max="10" value="7" step="0.5" class="slider">
+        </div>
+        
+        <div class="slider-container" style="margin-top: 20px; text-align: left;">
+            <label style="color: white;">Resting Heart Rate (ideal 55–75 bpm): <span id="hr-val">70</span> BPM</label>
+            <input type="range" id="hr" min="50" max="120" value="70" class="slider">
+        </div>
+        
+        <div class="slider-container" style="margin-top: 20px; text-align: left;">
+            <label style="color: white;">Activity Level (ideal 5–8): <span id="activity-val">5</span>/10</label>
+            <input type="range" id="activity" min="1" max="10" value="5" class="slider">
+        </div>
+        
+        <div class="slider-container" style="margin-top: 20px; text-align: left;">
+            <label style="color: white;">Stress Level (lower better): <span id="stress-val">4</span>/10</label>
+            <input type="range" id="stress" min="1" max="10" value="4" class="slider">
+        </div>
+
+        <!-- Output -->
+        <div id="mental-output" 
+             style="margin-top: 50px; padding: 30px; border-radius: 15px; 
+                    text-align: center; background: rgba(15,15,15,0.9); max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">Current Mental State</h3>
+            <p id="mental-state-text" style="font-size: 40px; font-weight: bold; margin-top: 5px;">Balanced</p>
+            <p id="mental-advice" style="color: #ccc; margin-top: 15px; font-size: 18px;">
+                Helpful advice will appear here.
+            </p>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    const sleepSlider = document.getElementById("sleep");
+    const hrSlider = document.getElementById("hr");
+    const activitySlider = document.getElementById("activity");
+    const stressSlider = document.getElementById("stress");
+
+    const sleepVal = document.getElementById("sleep-val");
+    const hrVal = document.getElementById("hr-val");
+    const activityVal = document.getElementById("activity-val");
+    const stressVal = document.getElementById("stress-val");
+
+    const stateText = document.getElementById("mental-state-text");
+
+    function updateMentalState() {
+        let sleep = parseFloat(sleepSlider.value);
+        let hr = parseInt(hrSlider.value);
+        let activity = parseInt(activitySlider.value);
+        let stress = parseInt(stressSlider.value);
+
+        // Update display values
+        sleepVal.textContent = sleep;
+        hrVal.textContent = hr;
+        activityVal.textContent = activity;
+        stressVal.textContent = stress;
+
+        // Simple scoring logic
+        let score = 0;
+
+        // Sleep contribution (ideal 7–9 hrs)
+        if (sleep >= 7 && sleep <= 9) score += 2;
+        else if (sleep >= 6) score += 1;
+        else score -= 1;
+
+        // Heart rate contribution (ideal 55–75 bpm)
+        if (hr >= 55 && hr <= 75) score += 2;
+        else if (hr < 90) score += 1;
+        else score -= 1;
+
+        // Activity contribution (ideal 5–8)
+        if (activity >= 5 && activity <= 8) score += 2;
+        else if (activity >= 3) score += 1;
+        else score -= 1;
+
+        // Stress contribution (lower better)
+        if (stress <= 3) score += 2;
+        else if (stress <= 6) score += 1;
+        else score -= 1;
+
+        // Determine mental state
+        // Determine mental state
+let state = "Balanced";
+let color = "#4cafef";
+let advice = "";
+
+// Map score to 10 mental states with advice
+if (score >= 8) {
+    state = "Thriving & Energized";
+    color = "#00e676"; // bright green
+    advice = "You're at your best! Keep up healthy habits and maintain balance.";
+} else if (score >= 6) {
+    state = "Calm & Resilient";
+    color = "#66bb6a"; // green
+    advice = "You’re handling stress well. Continue mindfulness or light exercise.";
+} else if (score >= 4) {
+    state = "Positive & Focused";
+    color = "#2196f3"; // blue
+    advice = "Stay productive and take short breaks to avoid fatigue.";
+} else if (score >= 2) {
+    state = "Balanced";
+    color = "#4cafef"; // light blue
+    advice = "You’re in a good place. Maintain regular sleep and activity.";
+} else if (score >= 0) {
+    state = "Slightly Fatigued";
+    color = "#ffb74d"; // orange
+    advice = "Consider a short rest or hydration to recharge energy.";
+} else if (score >= -2) {
+    state = "Tired & Distracted";
+    color = "#ff9800"; // darker orange
+    advice = "Reduce multitasking and allow yourself a proper break.";
+} else if (score >= -4) {
+    state = "Stressed";
+    color = "#f44336"; // red
+    advice = "Practice deep breathing or a quick walk to ease tension.";
+} else if (score >= -6) {
+    state = "Overwhelmed";
+    color = "#d32f2f"; // darker red
+    advice = "Prioritize tasks, seek support, and allow downtime.";
+} else if (score >= -8) {
+    state = "Burnout Risk";
+    color = "#b71c1c"; // deep red
+    advice = "Take extended rest, disconnect from work, and focus on self-care.";
+} else {
+    state = "Critical Distress";
+    color = "#9c27b0"; // purple
+    advice = "Reach out for professional help or support immediately.";
+}
+
+// Update UI
+        stateText.textContent = state;
+        stateText.style.color = color;
+
+        // Show advice under the state
+        let adviceBox = document.getElementById("mental-advice");
+        adviceBox.textContent = advice;
+    }
+
+    // Attach event listeners
+    [sleepSlider, hrSlider, activitySlider, stressSlider].forEach(slider => {
+        slider.addEventListener("input", updateMentalState);
+    });
+
+    // Initialize
+    updateMentalState();
+</script>
+
+
+    <!-- Download Section -->
+    <section id="download" class="download-section">
+        <div class="bg-animation">
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+            <div class="floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="download-content">
+                <h2 class="download-title">Software Requirements Specification</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Download the complete SRS document containing detailed technical specifications, 
+                    literature review, system architecture, and implementation guidelines for the 
+                    Passive Mental Health Monitoring System.
+                </p>
+                <a href="📑 Software Requirements Specification.pdf" class="download-btn" onclick="downloadSRS()">
+                    📄 Download Complete SRS Document
+                </a>
+                <h2 class="download-title">Research Paper</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Download the complete Research Paper presenting the study, methodology, experimental results, 
+and analysis that support the development of the Passive Mental Health Monitoring System. 
+This document highlights related work, research gaps, proposed framework, and findings 
+that validate the effectiveness of our mental health counseling chatbot.
+
+                </p>
+                <a href="research.pdf" class="download-btn" onclick="downloadSRS()">
+                    📄 Download Complete Research Document
+                </a>
+                <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
+                    Document includes: Literature Review • System Architecture • API Documentation • 
+                    Security Requirements • Validation Protocols
+                </p>
+            </div>
+            
+        </div>
+        
+    </section>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy code functionality
+        function copyCode(elementId) {
+            const codeElement = document.getElementById(elementId);
+            const textToCopy = codeElement.textContent;
+            
+            navigator.clipboard.writeText(textToCopy).then(function() {
+                // Show feedback
+                const button = codeElement.parentNode.querySelector('.copy-btn');
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = '#4caf50';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#4caf50';
+                }, 2000);
+            });
+        }
+
+        // Create correlation chart
+        function createCorrelationChart() {
+            const correlationData = [
+                {
+                    z: [
+                        [1.0, 0.72, 0.68, 0.45, 0.58, 0.33],
+                        [0.72, 1.0, 0.85, 0.52, 0.61, 0.41],
+                        [0.68, 0.85, 1.0, 0.48, 0.73, 0.38],
+                        [0.45, 0.52, 0.48, 1.0, 0.55, 0.67],
+                        [0.58, 0.61, 0.73, 0.55, 1.0, 0.44],
+                        [0.33, 0.41, 0.38, 0.67, 0.44, 1.0]
+                    ],
+                    x: ['Sleep Quality', 'Heart Rate', 'Activity Level', 'Phone Usage', 'Location Entropy', 'Social Interaction'],
+                    y: ['Sleep Quality', 'Heart Rate', 'Activity Level', 'Phone Usage', 'Location Entropy', 'Social Interaction'],
+                    type: 'heatmap',
+                    colorscale: [
+                        [0, '#000428'],
+                        [0.5, '#004e92'],
+                        [1, '#009ffd']
+                    ],
+                    showscale: true,
+                    colorbar: {
+                        title: 'Correlation Coefficient',
+                        titlefont: { color: 'white' },
+                        tickfont: { color: 'white' }
+                    }
+                }
+            ];
+
+            const layout = {
+                title: {
+                    text: 'Mental Health Indicators Correlation Matrix',
+                    font: { color: 'white', size: 18 }
+                },
+                xaxis: { 
+                    tickfont: { color: 'white' },
+                    tickangle: 45
+                },
+                yaxis: { 
+                    tickfont: { color: 'white' }
+                },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: { color: 'white' }
+            };
+
+            Plotly.newPlot('correlationChart', correlationData, layout, {responsive: true});
+        }
+
+        // Download SRS function
+        function downloadSRS() {
+            // In a real implementation, this would download the actual SRS PDF
+            alert('SRS document download will be available soon. This will contain the complete technical specification document.');
+            
+            // For demonstration, you could create a placeholder PDF or link to your actual document
+            // window.open('path/to/your/srs-document.pdf', '_blank');
+        }
+
+        // Initialize correlation chart when page loads
+        window.addEventListener('load', function() {
+            createCorrelationChart();
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.flow-card, .source-card, .api-card');
+            animatedElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Add parallax effect to floating elements
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelectorAll('.floating-element');
+            
+            parallax.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add hover effects to cards
+        document.querySelectorAll('.flow-card, .source-card, .api-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
+            });
+        });
+    </script>
+    
+</body>
+</html>
