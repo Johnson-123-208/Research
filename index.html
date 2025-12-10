@@ -1,219 +1,426 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Passive Mental Health Monitoring | Naarsoft Tech Services</title>
+    <title>GPN - Strategic Feature Enhancement Blueprint</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        /* Glossy shine animation overlay */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: -50%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0.05) 0%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.05) 100%
-  );
-  pointer-events: none; /* so it won’t block clicks */
-  z-index: 9999; /* sits on top */
-  animation: glossyMove 8s linear infinite;
-}
 
-/* Animation moves the shine across the page */
-@keyframes glossyMove {
-  0% {
-    transform: translateX(-50%) rotate(0deg);
-  }
-  100% {
-    transform: translateX(50%) rotate(0deg);
-  }
-}
+        :root {
+            --primary: #4F46E5;
+            --primary-light: #6366F1;
+            --secondary: #EC4899;
+            --accent: #F59E0B;
+            --success: #10B981;
 
+            --bg-primary: #1E1B4B;
+            --bg-secondary: #312E81;
+            --bg-card: #2D2A5F;
+            --bg-card-hover: #3730A3;
+
+            --text-primary: #FFFFFF;
+            --text-secondary: #E0E7FF;
+            --text-muted: #C7D2FE;
+            --text-accent: #FCD34D;
+
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow-strong: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            color: var(--text-primary);
             line-height: 1.6;
-            color: #333;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Glass morphism styles */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(79, 70, 229, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .glass-dark {
-            background: rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Background sections */
-        .hero-section {
-            height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+            padding: 2rem;
             position: relative;
             overflow: hidden;
         }
 
-        .data-flow-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            padding: 80px 0;
-            position: relative;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background:
+                radial-gradient(circle, rgba(79, 70, 229, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.2) 0%, transparent 50%);
+            animation: pulse 8s ease-in-out infinite;
         }
 
-        .sources-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            padding: 80px 0;
-            position: relative;
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.1) rotate(5deg);
+                opacity: 0.8;
+            }
         }
 
-        .api-section {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-            padding: 80px 0;
+        .hero-content {
             position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            animation: slideInUp 1s ease-out;
         }
 
-        .download-section {
-            height: 100vh;
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            font-size: 1.3rem;
+            color: var(--text-accent);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(252, 211, 77, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 20px rgba(252, 211, 77, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 30px rgba(252, 211, 77, 0.8);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 700;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FCD34D 0%, #EC4899 50%, #6366F1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 400;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
             display: flex;
-            align-items: center;
+            gap: 2rem;
             justify-content: center;
-            position: relative;
+            flex-wrap: wrap;
         }
 
-        /* Animated background elements */
-        .bg-animation {
+        .btn {
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4F46E5 0%, #EC4899 100%);
+            color: white;
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            border: 2px solid var(--text-accent);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-tag {
+            color: var(--text-accent);
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(252, 211, 77, 0.1);
+            border-radius: 50px;
+            border: 2px solid var(--text-accent);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #FFFFFF 0%, #E0E7FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.9;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-card-hover) 100%);
+            padding: 3rem;
+            border-radius: 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.15) 0%, rgba(236, 72, 153, 0.15) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .floating-element {
+        .feature-card::after {
+            content: '';
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(252, 211, 77, 0.1), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .floating-element:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-element:nth-child(2) { width: 60px; height: 60px; top: 60%; right: 15%; animation-delay: 2s; }
-        .floating-element:nth-child(3) { width: 100px; height: 100px; bottom: 30%; left: 20%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
-        /* Navigation */
-        nav {
+        .feature-card:hover::after {
+            opacity: 1;
+            transform: rotate(45deg);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            border-color: var(--text-accent);
+            box-shadow: 0 25px 60px rgba(79, 70, 229, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 5px 15px rgba(252, 211, 77, 0.3));
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+            font-size: 1.05rem;
+        }
+
+        .feature-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tag {
+            padding: 0.5rem 1.2rem;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.3), rgba(236, 72, 153, 0.3));
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--text-accent);
+            font-weight: 600;
+            border: 1px solid rgba(252, 211, 77, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.5), rgba(236, 72, 153, 0.5));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(252, 211, 77, 0.3);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            padding: 20px 50px;
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.1);
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
             backdrop-filter: blur(10px);
+            z-index: 1000;
+            overflow-y: auto;
         }
 
-        .nav-content {
+        .modal.active {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #ffeb3b;
-            transform: translateY(-2px);
-        }
-
-        /* Content containers */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        .modal-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
             position: relative;
-            z-index: 1;
-        }
-
-        /* Hero content */
-        .hero-content {
-            text-align: center;
-            color: white;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero-title {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: slideUp 1s ease 0.5s forwards;
-        }
-
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
-            opacity: 0;
-            animation: slideUp 1s ease 1s forwards;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            max-width: 800px;
-            margin: 0 auto 40px;
-            opacity: 0;
-            animation: slideUp 1s ease 1.5s forwards;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         @keyframes slideUp {
@@ -221,1513 +428,481 @@ body::before {
                 opacity: 0;
                 transform: translateY(50px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Section titles */
-        .section-title {
-            font-size: 3rem;
-            text-align: center;
-            margin-bottom: 60px;
-            color: white;
+        .modal-header {
+            padding: 3rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1 0%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .modal-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+        }
+
+        .modal-body {
+            padding: 3rem;
+        }
+
+        .modal-section {
+            margin-bottom: 3rem;
             opacity: 0;
-            animation: fadeInUp 1s ease forwards;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .modal-section:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .modal-section:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .modal-section:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .modal-section:nth-child(4) {
+            animation-delay: 0.4s;
         }
 
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Data flow visualization */
-        .flow-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
+        .modal-section h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--primary-light);
+            font-weight: 600;
         }
 
-        .flow-card {
-            padding: 30px;
-            text-align: center;
-            color: white;
-            transform: translateY(50px);
-            opacity: 0;
-            animation: cardSlideUp 0.8s ease forwards;
-            transition: all 0.3s ease;
+        .modal-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
         }
 
-        .flow-card:hover {
-            transform: translateY(-10px) scale(1.05);
+        .modal-section ul {
+            color: var(--text-secondary);
+            margin-left: 1.5rem;
+            line-height: 1.8;
         }
 
-        .flow-card:nth-child(1) { animation-delay: 0.2s; }
-        .flow-card:nth-child(2) { animation-delay: 0.4s; }
-        .flow-card:nth-child(3) { animation-delay: 0.6s; }
-        .flow-card:nth-child(4) { animation-delay: 0.8s; }
-
-        @keyframes cardSlideUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .hidden {
+            display: none;
         }
 
-        .flow-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .flow-title {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-
-        .flow-description {
-            font-size: 1rem;
-            line-height: 1.6;
-        }
-
-        /* Data sources grid */
-        .sources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-
-        .source-card {
-            padding: 30px;
-            color: white;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .source-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .source-header {
+        /* Tabs */
+        .tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 4rem;
         }
 
-        .source-name {
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-
-        .price-tag {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .free { background: #4caf50; }
-        .paid { background: #ff9800; }
-        .premium { background: #e91e63; }
-
-        .source-details {
-            margin-bottom: 20px;
-        }
-
-        .feature-list {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .feature-list li {
-            padding: 5px 0;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .feature-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #4caf50;
-            font-weight: bold;
-        }
-
-        /* API Code sections */
-        .api-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
-            gap: 30px;
-        }
-
-        .api-card {
-            padding: 30px;
-            color: white;
-        }
-        /* Custom slider style */
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 8px;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.2);
-  outline: none;
-  transition: background 0.3s;
-  margin-top: 8px;
-}
-
-.slider:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #4cafef;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.slider::-webkit-slider-thumb:hover {
-  background: #00e676;
-}
-
-.slider::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #4cafef;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-
-        .api-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #ffeb3b;
-        }
-
-        .code-block {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            overflow-x: auto;
-            position: relative;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #4caf50;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .copy-btn:hover {
-            background: #45a049;
-        }
-
-        /* Download section */
-        .download-content {
-            text-align: center;
-            color: white;
-        }
-
-        .download-title {
-            font-size: 3rem;
-            margin-bottom: 30px;
-        }
-
-        .download-btn {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 20px 50px;
-            font-size: 1.3rem;
-            border: none;
+        .tab-btn {
+            padding: 1.2rem 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Correlation diagram */
-        .correlation-diagram {
-            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 40px 0;
         }
 
-        .diagram-title {
-            text-align: center;
-            color: white;
-            font-size: 2rem;
-            margin-bottom: 30px;
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
 
-        /* Responsive design */
+        .tab-btn.active {
+            background: linear-gradient(135deg, #4F46E5 0%, #EC4899 100%);
+            border-color: transparent;
+            box-shadow: 0 15px 35px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero-title { font-size: 2.5rem; }
-            .hero-subtitle { font-size: 1.2rem; }
-            .section-title { font-size: 2rem; }
-            nav { padding: 15px 20px; }
-            .nav-links { display: none; }
-            .container { padding: 0 15px; }
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            .hero {
+                min-height: 80vh;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .modal-header,
+            .modal-body {
+                padding: 2rem;
+            }
+
+            .tabs {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
         }
 
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.5);
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
+
 <body>
-    <!-- Navigation -->
-    <nav id="navbar">
-        <div class="nav-content">
-            <a href="#" class="logo">🧠 Naarsoft Tech Services</a>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#data-flow">Data Flow</a></li>
-                <li><a href="#sources">Data Sources</a></li>
-                <li><a href="#api">API Integration</a></li>
-                <li><a href="#mental-state">Mental Estimator</a></li>
-                <li><a href="#download">Download SRS</a></li>
-            </ul>
-        </div>
-    </nav>
-
     <!-- Hero Section -->
-    <section id="hero" class="hero-section">
-        <div class="bg-animation">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Passive Mental Health Monitoring</h1>
-                <h2 class="hero-subtitle">Advanced AI-Driven Healthcare Solutions</h2>
-                <p class="hero-description">
-                    Revolutionizing mental healthcare through continuous, non-intrusive monitoring using smartphone and wearable sensors. 
-                    Our system combines cutting-edge machine learning with passive data collection to provide early detection and 
-                    continuous monitoring of mood states, supporting better clinical outcomes.
-                </p>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">🙏 Glocal Prayer Network</div>
+            <h1>Transforming Prayer. Empowering Faith.</h1>
+            <p class="hero-tagline">A comprehensive blueprint to scale GPN into a high-engagement, revenue-generating
+                spiritual ecosystem through AI innovation and strategic features.</p>
+            <div class="cta-buttons">
+                <a href="#ai-features" class="btn btn-primary">Explore AI Features</a>
+                <a href="#other-features" class="btn btn-secondary">View All Features</a>
             </div>
         </div>
     </section>
 
-    <!-- Data Flow Section -->
-    <section id="data-flow" class="data-flow-section">
-        <div class="bg-animation">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
+    <!-- AI Features Section -->
+    <section id="ai-features">
+        <div class="section-header">
+            <div class="section-tag">AI-Powered Innovation</div>
+            <h2 class="section-title">AI Features for GPN</h2>
+            <p class="section-description">Cutting-edge artificial intelligence features that personalize prayer
+                experiences, predict spiritual needs, and scale engagement exponentially.</p>
         </div>
-        <div class="container">
-            <h2 class="section-title">Complete Data Flow Process</h2>
-            
-            <div class="flow-container">
-                <div class="flow-card glass">
-                    <span class="flow-icon">📱</span>
-                    <h3 class="flow-title">Data Collection</h3>
-                    <p class="flow-description">
-                        Continuous passive sensing from smartphones and wearables including heart rate, accelerometer, 
-                        GPS, sleep patterns, and phone usage. Data collected at various frequencies (1Hz-daily) 
-                        with 95% uptime requirement.
-                    </p>
-                </div>
-                
-                <div class="flow-card glass">
-                    <span class="flow-icon">⚡</span>
-                    <h3 class="flow-title">Edge Processing</h3>
-                    <p class="flow-description">
-                        Real-time preprocessing on device including noise reduction, outlier detection, 
-                        feature extraction (44 behavioral features), and privacy protection through 
-                        differential privacy (ε=1.0).
-                    </p>
-                </div>
-                
-                <div class="flow-card glass">
-                    <span class="flow-icon">🧠</span>
-                    <h3 class="flow-title">ML Analysis</h3>
-                    <p class="flow-description">
-                        CNN-LSTM models (92.16% accuracy) analyze temporal patterns, Random Forest for 
-                        interpretability, and XGBoost for performance. Personalized models after 
-                        2-week calibration period.
-                    </p>
-                </div>
-                
-                <div class="flow-card glass">
-                    <span class="flow-icon">🏥</span>
-                    <h3 class="flow-title">Clinical Interface</h3>
-                    <p class="flow-description">
-                        Healthcare provider dashboard with real-time alerts, longitudinal trends, 
-                        risk stratification, and intervention recommendations. HL7 FHIR integration 
-                        for seamless EHR connectivity.
-                    </p>
+
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('ai')">🤖 AI Features</button>
+            <button class="tab-btn" onclick="showTab('other')">💡 Other Features</button>
+        </div>
+
+        <div id="ai-tab" class="features-grid">
+            <div class="feature-card fade-in" onclick="openModal('ai-prayer-assistant')">
+                <div class="feature-icon">🤖</div>
+                <h3 class="feature-title">AI Prayer Assistant</h3>
+                <p class="feature-description">24/7 spiritual guidance through conversational AI that understands
+                    context, provides scripture, and offers personalized prayer support.</p>
+                <div class="feature-tags">
+                    <span class="tag">Premium Feature</span>
+                    <span class="tag">Revenue+</span>
+                    <span class="tag">High Impact</span>
                 </div>
             </div>
 
-            <div class="correlation-diagram glass">
-                <h3 class="diagram-title">Data Correlation Analysis</h3>
-                <div id="correlationChart" style="width: 100%; height: 400px;"></div>
+            <div class="feature-card fade-in" onclick="openModal('smart-prayer-recommendations')">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Smart Prayer Recommendations</h3>
+                <p class="feature-description">Machine learning analyzes user behavior to suggest personalized prayer
+                    programs, increasing discovery and engagement by 3x.</p>
+                <div class="feature-tags">
+                    <span class="tag">Engagement+</span>
+                    <span class="tag">Personalization</span>
+                    <span class="tag">Retention</span>
+                </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Data Sources Section -->
-    <section id="sources" class="sources-section">
-        <div class="bg-animation">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">Passive Data Sources & Pricing</h2>
-            
-            <div class="sources-grid">
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Google Fit API</h3>
-                        <span class="price-tag free">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Steps, heart rate, sleep, physical activity</p>
-                        <p><strong>Rate Limits:</strong> 1000 requests/day</p>
-                        <p><strong>Accuracy:</strong> 85-95% for step counting</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Real-time activity tracking</li>
-                        <li>Historical data access (up to 1 year)</li>
-                        <li>Multiple device integration</li>
-                        <li>OAuth 2.0 authentication</li>
-                    </ul>
+            <div class="feature-card fade-in" onclick="openModal('voice-to-prayer')">
+                <div class="feature-icon">🎤</div>
+                <h3 class="feature-title">Voice-to-Prayer Conversion</h3>
+                <p class="feature-description">Speak prayers naturally, AI transcribes, formats, and organizes them with
+                    automatic categorization and scripture suggestions.</p>
+                <div class="feature-tags">
+                    <span class="tag">Accessibility</span>
+                    <span class="tag">Innovation</span>
+                    <span class="tag">Premium</span>
                 </div>
-
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Apple HealthKit</h3>
-                        <span class="price-tag free">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Heart rate, sleep, activity, mindfulness</p>
-                        <p><strong>Rate Limits:</strong> No explicit limits</p>
-                        <p><strong>Accuracy:</strong> 90-98% for biometric data</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Comprehensive health metrics</li>
-                        <li>Privacy-first architecture</li>
-                        <li>Clinical-grade accuracy</li>
-                        <li>iOS ecosystem integration</li>
-                    </ul>
-                </div>
-
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Fitbit Web API</h3>
-                        <span class="price-tag paid">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Heart rate, sleep stages, activity, stress</p>
-                        <p><strong>Rate Limits:</strong> 150 requests/hour</p>
-                        <p><strong>Accuracy:</strong> 95-99% for heart rate</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Detailed sleep stage analysis</li>
-                        <li>Continuous heart rate monitoring</li>
-                        <li>Stress and recovery metrics</li>
-                        <li>Social and community features</li>
-                    </ul>
-                </div>
-
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Garmin Connect IQ</h3>
-                        <span class="price-tag paid">Free, enterprise approval required</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Advanced metrics, sleep, stress, recovery</p>
-                        <p><strong>Rate Limits:</strong> 100 requests/hour</p>
-                        <p><strong>Accuracy:</strong> 98-99% for fitness metrics</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Professional-grade sensors</li>
-                        <li>Body battery energy monitoring</li>
-                        <li>Advanced sleep tracking</li>
-                        <li>Stress and recovery analytics</li>
-                    </ul>
-                </div>
-
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Oura Ring API</h3>
-                        <span class="price-tag premium">FREE (requires Oura Membership $5.99/mo for users)</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Sleep quality, HRV, temperature, readiness</p>
-                        <p><strong>Rate Limits:</strong> 5000 requests/day</p>
-                        <p><strong>Accuracy:</strong> 99% for sleep tracking</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Research-grade sleep analysis</li>
-                        <li>Heart rate variability</li>
-                        <li>Body temperature trends</li>
-                        <li>Readiness and recovery scores</li>
-                    </ul>
-                </div>
-
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Polar API</h3>
-                        <span class="price-tag paid">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Heart rate, training load, recovery</p>
-                        <p><strong>Rate Limits:</strong> 1000 requests/day</p>
-                        <p><strong>Accuracy:</strong> 99.6% for ECG-accurate HR</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>ECG-accurate heart rate</li>
-                        <li>Training load analytics</li>
-                        <li>Recovery recommendations</li>
-                        <li>Professional athlete grade</li>
-                    </ul>
-                </div>
-                                <!-- Samsung Health API -->
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Samsung Health API</h3>
-                        <span class="price-tag free">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Steps, heart rate, sleep, workouts, nutrition</p>
-                        <p><strong>Rate Limits:</strong> No public limits (Samsung approval required)</p>
-                        <p><strong>Accuracy:</strong> Comparable to Google Fit (90–95%)</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Deep Android ecosystem integration</li>
-                        <li>Comprehensive health metrics</li>
-                        <li>Multi-device & smartwatch support</li>
-                        <li>User consent required</li>
-                    </ul>
-                </div>
-
-                <!-- Whoop API -->
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Whoop API</h3>
-                        <span class="price-tag premium">Enterprise</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Recovery, HRV, strain, sleep performance</p>
-                        <p><strong>Rate Limits:</strong> Varies (partner access required)</p>
-                        <p><strong>Accuracy:</strong> 98–99% for HRV and recovery metrics</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Athlete performance focus</li>
-                        <li>Recovery and strain analytics</li>
-                        <li>High-resolution HRV tracking</li>
-                        <li>Enterprise access agreements</li>
-                    </ul>
-                </div>
-
-                <!-- Withings API -->
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Withings API</h3>
-                        <span class="price-tag free">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Weight, body composition, sleep, heart rate</p>
-                        <p><strong>Rate Limits:</strong> 200 requests/hour</p>
-                        <p><strong>Accuracy:</strong> Medical-grade scale data</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Smart scales & sleep mats integration</li>
-                        <li>Body composition analysis</li>
-                        <li>Medical-grade accuracy</li>
-                        <li>OAuth 2.0 access</li>
-                    </ul>
-                </div>
-
-                <!-- Strava API -->
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Strava API</h3>
-                        <span class="price-tag free">FREE</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> GPS workouts, cycling, running, heart rate</p>
-                        <p><strong>Rate Limits:</strong> 100 requests per 15 min, 1,000/day</p>
-                        <p><strong>Accuracy:</strong> GPS device dependent (95–99%)</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Endurance sports focus</li>
-                        <li>Strong community features</li>
-                        <li>Route and segment tracking</li>
-                        <li>OAuth 2.0 authentication</li>
-                    </ul>
-                </div>
-
-                <!-- Dexcom API -->
-                <div class="source-card glass-dark">
-                    <div class="source-header">
-                        <h3 class="source-name">Dexcom API</h3>
-                        <span class="price-tag premium">Clinical</span>
-                    </div>
-                    <div class="source-details">
-                        <p><strong>Data Types:</strong> Continuous glucose monitoring (CGM)</p>
-                        <p><strong>Rate Limits:</strong> 300 requests/hour</p>
-                        <p><strong>Accuracy:</strong> FDA-approved CGM accuracy (MARD ~9%)</p>
-                    </div>
-                    <ul class="feature-list">
-                        <li>Diabetes management data</li>
-                        <li>Real-time glucose readings</li>
-                        <li>Regulatory compliance</li>
-                        <li>Patient consent required</li>
-                    </ul>
-                </div>
-
             </div>
-        </div>
-    </section>
 
-    <!-- API Integration Section -->
-    <section id="api" class="api-section">
-        <div class="bg-animation">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container">
-            <h2 class="section-title">API Integration Code Examples</h2>
-            
-            <div class="api-container">
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Google Fit API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Getting API Key:</strong><br>
-                        1. Go to Google Cloud Console<br>
-                        2. Create/Select project<br>
-                        3. Enable Fitness API<br>
-                        4. Create credentials (OAuth 2.0)
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('googlefit-code')">Copy</button>
-                        <pre id="googlefit-code">import requests
-from google.oauth2.credentials import Credentials
-
-# Authentication setup
-def get_google_fit_data(access_token):
-    headers = {
-        'Authorization': f'Bearer {access_token}',
-        'Content-Type': 'application/json'
-    }
-    
-    # Get step count data
-    url = 'https://www.googleapis.com/fitness/v1/users/me/dataSources'
-    response = requests.get(url, headers=headers)
-    
-    # Get aggregated data
-    agg_url = 'https://www.googleapis.com/fitness/v1/users/me/dataset:aggregate'
-    payload = {
-        "aggregateBy": [{
-            "dataTypeName": "com.google.step_count.delta",
-            "dataSourceId": "derived:com.google.step_count.delta:com.google.android.gms:estimated_steps"
-        }],
-        "bucketByTime": {"durationMillis": 86400000},  # 1 day
-        "startTimeMillis": 1640995200000,
-        "endTimeMillis": 1641081600000
-    }
-    
-    agg_response = requests.post(agg_url, json=payload, headers=headers)
-    return agg_response.json()
-
-# Usage
-data = get_google_fit_data('YOUR_ACCESS_TOKEN')</pre>
-                    </div>
+            <div class="feature-card fade-in" onclick="openModal('sentiment-analysis')">
+                <div class="feature-icon">💭</div>
+                <h3 class="feature-title">Prayer Sentiment Analysis</h3>
+                <p class="feature-description">NLP analyzes prayer text to detect emotions, track spiritual growth
+                    trends, and provide data-driven insights dashboard.</p>
+                <div class="feature-tags">
+                    <span class="tag">Analytics</span>
+                    <span class="tag">Premium $9.99/mo</span>
+                    <span class="tag">Insights</span>
                 </div>
+            </div>
 
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Apple HealthKit (iOS)</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Enable HealthKit capability in Xcode<br>
-                        2. Add usage description in Info.plist<br>
-                        3. Request permissions from user<br>
-                        4. Query health data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('healthkit-code')">Copy</button>
-                        <pre id="healthkit-code">import HealthKit
-
-class HealthKitManager {
-    let healthStore = HKHealthStore()
-    
-    func requestPermissions() {
-        let healthTypes: Set = [
-            HKObjectType.quantityType(forIdentifier: .heartRate)!,
-            HKObjectType.quantityType(forIdentifier: .stepCount)!,
-            HKObjectType.categoryType(forIdentifier: .sleepAnalysis)!
-        ]
-        
-        healthStore.requestAuthorization(toShare: nil, read: healthTypes) { success, error in
-            if success {
-                self.fetchHeartRateData()
-            }
-        }
-    }
-    
-    func fetchHeartRateData() {
-        let heartRateType = HKQuantityType.quantityType(forIdentifier: .heartRate)!
-        let query = HKSampleQuery(sampleType: heartRateType,
-                                 predicate: nil,
-                                 limit: 100,
-                                 sortDescriptors: nil) { query, samples, error in
-            guard let heartRateSamples = samples as? [HKQuantitySample] else { return }
-            
-            for sample in heartRateSamples {
-                let heartRate = sample.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
-                print("Heart Rate: \(heartRate) BPM at \(sample.startDate)")
-            }
-        }
-        healthStore.execute(query)
-    }
-}</pre>
-                    </div>
+            <div class="feature-card fade-in" onclick="openModal('ai-translation')">
+                <div class="feature-icon">🌍</div>
+                <h3 class="feature-title">AI Multi-Language Translation</h3>
+                <p class="feature-description">Real-time neural translation of prayers into 100+ languages, expanding
+                    global reach and accessibility dramatically.</p>
+                <div class="feature-tags">
+                    <span class="tag">Global Reach</span>
+                    <span class="tag">Scalability</span>
+                    <span class="tag">Inclusion</span>
                 </div>
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Samsung Health API (Android)</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Register your app with Samsung Health SDK<br>
-                        2. Add required permissions in AndroidManifest.xml<br>
-                        3. Connect to HealthDataStore<br>
-                        4. Query health data (steps, HR, sleep)
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('samsung-code')">Copy</button>
-                        <pre id="samsung-code">import com.samsung.android.sdk.healthdata.*
-                
-                class SamsungHealthManager(context: Context) {
-                    private val mStore: HealthDataStore = HealthDataStore(context, object : HealthDataStore.ConnectionListener {
-                        override fun onConnected() {
-                            println("Samsung Health connected")
-                        }
-                        override fun onConnectionFailed(error: HealthConnectionErrorResult) {
-                            println("Connection failed: ${error.message}")
-                        }
-                        override fun onDisconnected() {}
-                    })
-                
-                    init {
-                        mStore.connectService()
-                    }
-                
-                    fun readSteps() {
-                        val dataType = HealthConstants.StepCount.HEALTH_DATA_TYPE
-                        val resolver = HealthDataResolver(mStore, null)
-                        val request = HealthDataResolver.ReadRequest.Builder()
-                            .setDataType(dataType)
-                            .build()
-                        val result = resolver.read(request)
-                        result.await().use { res ->
-                            res.iterator().forEach {
-                                println("Steps: ${it.getInt(HealthConstants.StepCount.COUNT)}")
-                            }
-                        }
-                    }
-                }</pre>
-                    </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('prayer-insights')">
+                <div class="feature-icon">📊</div>
+                <h3 class="feature-title">AI Prayer Insights Dashboard</h3>
+                <p class="feature-description">Beautiful analytics showing prayer patterns, consistency streaks,
+                    spiritual growth metrics, and AI-generated monthly reports.</p>
+                <div class="feature-tags">
+                    <span class="tag">Premium Feature</span>
+                    <span class="tag">Gamification</span>
+                    <span class="tag">Motivation</span>
                 </div>
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Whoop API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Apply for developer access at developer.whoop.com<br>
-                        2. Get OAuth 2.0 client credentials<br>
-                        3. Request user authorization<br>
-                        4. Query recovery, sleep, and strain data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('whoop-code')">Copy</button>
-                        <pre id="whoop-code">import requests
-                
-                class WhoopAPI:
-                    def __init__(self, access_token):
-                        self.base_url = "https://api.prod.whoop.com/developer"
-                        self.headers = {"Authorization": f"Bearer {access_token}"}
-                
-                    def get_recovery(self, start, end):
-                        url = f"{self.base_url}/v1/recovery?start={start}&end={end}"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                    def get_sleep(self, start, end):
-                        url = f"{self.base_url}/v1/sleep?start={start}&end={end}"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                # Usage
-                whoop = WhoopAPI("YOUR_ACCESS_TOKEN")
-                print(whoop.get_recovery("2025-01-01", "2025-01-07"))</pre>
-                    </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('smart-reminders')">
+                <div class="feature-icon">⏰</div>
+                <h3 class="feature-title">Intelligent Prayer Reminders</h3>
+                <p class="feature-description">AI learns optimal prayer times for each user, sending context-aware
+                    notifications that increase completion rates by 60%.</p>
+                <div class="feature-tags">
+                    <span class="tag">Retention+</span>
+                    <span class="tag">Smart Timing</span>
+                    <span class="tag">Habit Building</span>
                 </div>
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Withings API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Register your app at developer.withings.com<br>
-                        2. Implement OAuth 2.0 flow<br>
-                        3. Request user authorization<br>
-                        4. Access measurements and sleep data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('withings-code')">Copy</button>
-                        <pre id="withings-code">import requests
-                
-                class WithingsAPI:
-                    def __init__(self, access_token):
-                        self.base_url = "https://wbsapi.withings.net"
-                        self.headers = {"Authorization": f"Bearer {access_token}"}
-                
-                    def get_measurements(self):
-                        url = f"{self.base_url}/measure?action=getmeas"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                    def get_sleep(self, start, end):
-                        url = f"{self.base_url}/v2/sleep"
-                        params = {"action": "get", "startdate": start, "enddate": end}
-                        response = requests.get(url, headers=self.headers, params=params)
-                        return response.json()
-                
-                # Usage
-                withings = WithingsAPI("YOUR_ACCESS_TOKEN")
-                print(withings.get_measurements())</pre>
-                    </div>
-                </div>
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Strava API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Register app at developers.strava.com<br>
-                        2. Obtain Client ID & Secret<br>
-                        3. Implement OAuth 2.0 flow<br>
-                        4. Fetch athlete profile and activities
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('strava-code')">Copy</button>
-                        <pre id="strava-code">import requests
-                
-                class StravaAPI:
-                    def __init__(self, access_token):
-                        self.base_url = "https://www.strava.com/api/v3"
-                        self.headers = {"Authorization": f"Bearer {access_token}"}
-                
-                    def get_activities(self, per_page=10):
-                        url = f"{self.base_url}/athlete/activities?per_page={per_page}"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                    def get_profile(self):
-                        url = f"{self.base_url}/athlete"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                # Usage
-                strava = StravaAPI("YOUR_ACCESS_TOKEN")
-                print(strava.get_activities())</pre>
-                    </div>
-                </div>
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Dexcom API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Setup Process:</strong><br>
-                        1. Apply for developer account at developer.dexcom.com<br>
-                        2. Obtain OAuth 2.0 credentials<br>
-                        3. Use sandbox API for testing<br>
-                        4. Query CGM glucose and device data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('dexcom-code')">Copy</button>
-                        <pre id="dexcom-code">import requests
-                
-                class DexcomAPI:
-                    def __init__(self, access_token):
-                        self.base_url = "https://sandbox-api.dexcom.com/v2"
-                        self.headers = {"Authorization": f"Bearer {access_token}"}
-                
-                    def get_glucose_data(self, start, end):
-                        url = f"{self.base_url}/users/self/egvs?startDate={start}&endDate={end}"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                    def get_devices(self):
-                        url = f"{self.base_url}/users/self/devices"
-                        response = requests.get(url, headers=self.headers)
-                        return response.json()
-                
-                # Usage
-                dexcom = DexcomAPI("YOUR_ACCESS_TOKEN")
-                print(dexcom.get_glucose_data("2025-01-01T00:00:00", "2025-01-02T00:00:00"))</pre>
-                    </div>
-                </div>
-                
-                
-                
-                
+            </div>
 
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Fitbit Web API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Getting API Access:</strong><br>
-                        1. Register app at dev.fitbit.com<br>
-                        2. Get Client ID and Secret<br>
-                        3. Implement OAuth 2.0 flow<br>
-                        4. Request user authorization
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('fitbit-code')">Copy</button>
-                        <pre id="fitbit-code">import requests
-import base64
-from datetime import datetime
-
-class FitbitAPI:
-    def __init__(self, client_id, client_secret):
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.base_url = 'https://api.fitbit.com/1'
-    
-    def get_access_token(self, auth_code):
-        url = 'https://api.fitbit.com/oauth2/token'
-        headers = {
-            'Authorization': f'Basic {base64.b64encode(f"{self.client_id}:{self.client_secret}".encode()).decode()}',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        data = {
-            'client_id': self.client_id,
-            'grant_type': 'authorization_code',
-            'code': auth_code,
-            'redirect_uri': 'YOUR_REDIRECT_URI'
-        }
-        response = requests.post(url, headers=headers, data=data)
-        return response.json()
-    
-    def get_heart_rate_data(self, access_token, date='today'):
-        url = f'{self.base_url}/user/-/activities/heart/date/{date}/1d/1min.json'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        response = requests.get(url, headers=headers)
-        return response.json()
-    
-    def get_sleep_data(self, access_token, date='today'):
-        url = f'{self.base_url}/user/-/sleep/date/{date}.json'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        response = requests.get(url, headers=headers)
-        return response.json()
-
-# Usage
-fitbit = FitbitAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET')
-heart_data = fitbit.get_heart_rate_data('ACCESS_TOKEN')
-sleep_data = fitbit.get_sleep_data('ACCESS_TOKEN')</pre>
-                    </div>
-                </div>
-
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Oura Ring API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Getting API Access:</strong><br>
-                        1. Apply for developer access at cloud.ouraring.com<br>
-                        2. Get Personal Access Token<br>
-                        3. Use OAuth 2.0 for production apps<br>
-                        4. Access comprehensive sleep/recovery data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('oura-code')">Copy</button>
-                        <pre id="oura-code">import requests
-from datetime import datetime, timedelta
-
-class OuraAPI:
-    def __init__(self, access_token):
-        self.access_token = access_token
-        self.base_url = 'https://api.ouraring.com/v2'
-        self.headers = {
-            'Authorization': f'Bearer {access_token}',
-            'Content-Type': 'application/json'
-        }
-    
-    def get_sleep_data(self, start_date=None, end_date=None):
-        if not start_date:
-            start_date = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
-        if not end_date:
-            end_date = datetime.now().strftime('%Y-%m-%d')
-        
-        url = f'{self.base_url}/usercollection/sleep'
-        params = {
-            'start_date': start_date,
-            'end_date': end_date
-        }
-        response = requests.get(url, headers=self.headers, params=params)
-        return response.json()
-    
-    def get_readiness_data(self, start_date=None, end_date=None):
-        if not start_date:
-            start_date = (datetime.now() - timedelta(days=7)).strftime('%Y-%m-%d')
-        
-        url = f'{self.base_url}/usercollection/daily_readiness'
-        params = {
-            'start_date': start_date,
-            'end_date': end_date
-        }
-        response = requests.get(url, headers=self.headers, params=params)
-        return response.json()
-    
-    def get_hrv_data(self, start_date=None, end_date=None):
-        url = f'{self.base_url}/usercollection/heartrate'
-        params = {
-            'start_datetime': f'{start_date}T00:00:00.000Z',
-            'end_datetime': f'{end_date}T23:59:59.999Z'
-        }
-        response = requests.get(url, headers=self.headers, params=params)
-        return response.json()
-
-# Usage
-oura = OuraAPI('YOUR_ACCESS_TOKEN')
-sleep_data = oura.get_sleep_data()
-readiness_data = oura.get_readiness_data()
-hrv_data = oura.get_hrv_data('2024-01-01', '2024-01-07')</pre>
-                    </div>
-                </div>
-
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Garmin Connect IQ</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Getting API Access:</strong><br>
-                        1. Register at developer.garmin.com<br>
-                        2. Create application and get credentials<br>
-                        3. Implement OAuth 1.0a flow<br>
-                        4. Access wellness and activity data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('garmin-code')">Copy</button>
-                        <pre id="garmin-code">import requests
-import hashlib
-import hmac
-import base64
-from urllib.parse import quote
-import time
-import random
-
-class GarminConnectAPI:
-    def __init__(self, consumer_key, consumer_secret):
-        self.consumer_key = consumer_key
-        self.consumer_secret = consumer_secret
-        self.base_url = 'https://apis.garmin.com/wellness-api/rest'
-    
-    def generate_oauth_signature(self, method, url, params, token_secret=''):
-        # OAuth 1.0a signature generation
-        sorted_params = sorted(params.items())
-        param_string = '&'.join([f'{k}={v}' for k, v in sorted_params])
-        
-        base_string = f'{method}&{quote(url, safe="")}&{quote(param_string, safe="")}'
-        signing_key = f'{quote(self.consumer_secret, safe="")}&{quote(token_secret, safe="")}'
-        
-        signature = base64.b64encode(
-            hmac.new(signing_key.encode(), base_string.encode(), hashlib.sha1).digest()
-        ).decode()
-        
-        return signature
-    
-    def get_user_summary(self, access_token, token_secret, date):
-        url = f'{self.base_url}/dailies'
-        
-        oauth_params = {
-            'oauth_consumer_key': self.consumer_key,
-            'oauth_token': access_token,
-            'oauth_signature_method': 'HMAC-SHA1',
-            'oauth_timestamp': str(int(time.time())),
-            'oauth_nonce': str(random.randint(1000000, 9999999)),
-            'oauth_version': '1.0',
-            'calendarDate': date
-        }
-        
-        signature = self.generate_oauth_signature('GET', url, oauth_params, token_secret)
-        oauth_params['oauth_signature'] = signature
-        
-        response = requests.get(url, params=oauth_params)
-        return response.json()
-    
-    def get_activities(self, access_token, token_secret, start_date, end_date):
-        url = f'{self.base_url}/activities'
-        
-        oauth_params = {
-            'oauth_consumer_key': self.consumer_key,
-            'oauth_token': access_token,
-            'oauth_signature_method': 'HMAC-SHA1',
-            'oauth_timestamp': str(int(time.time())),
-            'oauth_nonce': str(random.randint(1000000, 9999999)),
-            'oauth_version': '1.0',
-            'startDate': start_date,
-            'endDate': end_date
-        }
-        
-        signature = self.generate_oauth_signature('GET', url, oauth_params, token_secret)
-        oauth_params['oauth_signature'] = signature
-        
-        response = requests.get(url, params=oauth_params)
-        return response.json()
-
-# Usage
-garmin = GarminConnectAPI('YOUR_CONSUMER_KEY', 'YOUR_CONSUMER_SECRET')
-summary = garmin.get_user_summary('ACCESS_TOKEN', 'TOKEN_SECRET', '2024-01-01')</pre>
-                    </div>
-                </div>
-
-                <div class="api-card glass-dark">
-                    <h3 class="api-title">Polar API</h3>
-                    <p style="color: white; margin-bottom: 15px;">
-                        <strong>Getting API Access:</strong><br>
-                        1. Register at www.polar.com/accesslink-api<br>
-                        2. Get client credentials<br>
-                        3. Implement OAuth 2.0 authorization flow<br>
-                        4. Access training and wellness data
-                    </p>
-                    <div class="code-block">
-                        <button class="copy-btn" onclick="copyCode('polar-code')">Copy</button>
-                        <pre id="polar-code">import requests
-import base64
-from datetime import datetime
-
-class PolarAccessLinkAPI:
-    def __init__(self, client_id, client_secret):
-        self.client_id = client_id
-        self.client_secret = client_secret
-        self.base_url = 'https://www.polaraccesslink.com/v3'
-    
-    def get_access_token(self, authorization_code):
-        url = 'https://polarremote.com/v2/oauth2/token'
-        
-        auth_header = base64.b64encode(f'{self.client_id}:{self.client_secret}'.encode()).decode()
-        headers = {
-            'Authorization': f'Basic {auth_header}',
-            'Content-Type': 'application/x-www-form-urlencoded'
-        }
-        
-        data = {
-            'grant_type': 'authorization_code',
-            'code': authorization_code
-        }
-        
-        response = requests.post(url, headers=headers, data=data)
-        return response.json()
-    
-    def register_user(self, access_token, member_id):
-        url = f'{self.base_url}/users'
-        headers = {
-            'Authorization': f'Bearer {access_token}',
-            'Content-Type': 'application/json'
-        }
-        data = {'member-id': member_id}
-        
-        response = requests.post(url, headers=headers, json=data)
-        return response.status_code == 200
-    
-    def get_available_data(self, access_token, user_id):
-        url = f'{self.base_url}/users/{user_id}/exercise-transactions'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        
-        response = requests.get(url, headers=headers)
-        return response.json()
-    
-    def get_exercise_summary(self, access_token, user_id, transaction_id):
-        url = f'{self.base_url}/users/{user_id}/exercise-transactions/{transaction_id}'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        
-        response = requests.get(url, headers=headers)
-        return response.json()
-    
-    def get_daily_activity(self, access_token, user_id, date):
-        url = f'{self.base_url}/users/{user_id}/activity-transactions'
-        headers = {'Authorization': f'Bearer {access_token}'}
-        
-        response = requests.get(url, headers=headers)
-        return response.json()
-
-# Usage
-polar = PolarAccessLinkAPI('YOUR_CLIENT_ID', 'YOUR_CLIENT_SECRET')
-token_data = polar.get_access_token('AUTHORIZATION_CODE')
-access_token = token_data['access_token']
-user_registered = polar.register_user(access_token, 'MEMBER_ID')</pre>
-                    </div>
+            <div class="feature-card fade-in" onclick="openModal('ai-content-generation')">
+                <div class="feature-icon">✍️</div>
+                <h3 class="feature-title">AI Prayer Content Generator</h3>
+                <p class="feature-description">Generate complete prayer series, devotionals, and spiritual content at
+                    scale, reducing creation time by 80%.</p>
+                <div class="feature-tags">
+                    <span class="tag">Content Scaling</span>
+                    <span class="tag">Efficiency</span>
+                    <span class="tag">Quality</span>
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    <!-- Mental State Estimator -->
-<!-- Full Page Width Mental State Estimator -->
-<section id="mental-state" 
-    style="width: 100%; min-height: 100vh; padding: 80px 20px; 
-           background: linear-gradient(135deg, #fc00ca, #ff9800); display: flex; flex-direction: column; align-items: center; justify-content: center;">
-
-    <div style="max-width: 1000px; width: 100%; text-align: center;">
-        <h2 style="color: #fff; margin-bottom: 20px; font-size: 36px; font-weight: bold;">
-            🧠 Mental State Estimator
-        </h2>
-        <p style="color: #eee; margin-bottom: 40px; font-size: 18px;">
-            Adjust the sliders below to simulate changes in passive data and see how it affects your mental state.
-        </p>
-
-        <!-- Sliders -->
-        <div class="slider-container" style="margin-top: 20px; text-align: left;">
-            <label style="color: white;">Sleep Hours (ideal 7–9 hrs): <span id="sleep-val">7</span> hrs</label>
-            <input type="range" id="sleep" min="3" max="10" value="7" step="0.5" class="slider">
-        </div>
-        
-        <div class="slider-container" style="margin-top: 20px; text-align: left;">
-            <label style="color: white;">Resting Heart Rate (ideal 55–75 bpm): <span id="hr-val">70</span> BPM</label>
-            <input type="range" id="hr" min="50" max="120" value="70" class="slider">
-        </div>
-        
-        <div class="slider-container" style="margin-top: 20px; text-align: left;">
-            <label style="color: white;">Activity Level (ideal 5–8): <span id="activity-val">5</span>/10</label>
-            <input type="range" id="activity" min="1" max="10" value="5" class="slider">
-        </div>
-        
-        <div class="slider-container" style="margin-top: 20px; text-align: left;">
-            <label style="color: white;">Stress Level (lower better): <span id="stress-val">4</span>/10</label>
-            <input type="range" id="stress" min="1" max="10" value="4" class="slider">
+    <!-- Other Features Section -->
+    <section id="other-features" class="hidden">
+        <div class="section-header">
+            <div class="section-tag">Growth & Revenue Features</div>
+            <h2 class="section-title">Strategic Features for Engagement & Revenue</h2>
+            <p class="section-description">Proven features that drive user engagement, build community, and create
+                sustainable revenue streams.</p>
         </div>
 
-        <!-- Output -->
-        <div id="mental-output" 
-             style="margin-top: 50px; padding: 30px; border-radius: 15px; 
-                    text-align: center; background: rgba(15,15,15,0.9); max-width: 800px; margin-left: auto; margin-right: auto;">
-            <h3 style="color: #fff; font-size: 24px; margin-bottom: 10px;">Current Mental State</h3>
-            <p id="mental-state-text" style="font-size: 40px; font-weight: bold; margin-top: 5px;">Balanced</p>
-            <p id="mental-advice" style="color: #ccc; margin-top: 15px; font-size: 18px;">
-                Helpful advice will appear here.
-            </p>
+        <div id="other-tab" class="features-grid">
+            <div class="feature-card fade-in" onclick="openModal('premium-subscription')">
+                <div class="feature-icon">💎</div>
+                <h3 class="feature-title">Premium Subscription Tiers</h3>
+                <p class="feature-description">Three-tier model: Free, Premium ($9.99/mo), Premium Plus ($19.99/mo)
+                    unlocking AI features, insights, and exclusive content.</p>
+                <div class="feature-tags">
+                    <span class="tag">Direct Revenue</span>
+                    <span class="tag">Recurring Income</span>
+                    <span class="tag">Scalable</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('virtual-prayer-rooms')">
+                <div class="feature-icon">🏛️</div>
+                <h3 class="feature-title">Virtual Prayer Rooms</h3>
+                <p class="feature-description">Live video prayer sessions, community gatherings, and interactive worship
+                    experiences driving deep engagement.</p>
+                <div class="feature-tags">
+                    <span class="tag">Community</span>
+                    <span class="tag">Premium Feature</span>
+                    <span class="tag">Engagement+</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('prayer-challenges')">
+                <div class="feature-icon">🏆</div>
+                <h3 class="feature-title">Prayer Challenges & Gamification</h3>
+                <p class="feature-description">Streaks, badges, leaderboards, and monthly challenges creating
+                    habit-forming engagement loops.</p>
+                <div class="feature-tags">
+                    <span class="tag">Viral Potential</span>
+                    <span class="tag">Retention</span>
+                    <span class="tag">Social Sharing</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('donation-integration')">
+                <div class="feature-icon">💰</div>
+                <h3 class="feature-title">Integrated Donation System</h3>
+                <p class="feature-description">Connect prayers with charitable giving, taking 5-10% platform fee while
+                    supporting verified causes.</p>
+                <div class="feature-tags">
+                    <span class="tag">Revenue Stream</span>
+                    <span class="tag">Social Impact</span>
+                    <span class="tag">Partnerships</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('prayer-marketplace')">
+                <div class="feature-icon">🛍️</div>
+                <h3 class="feature-title">Prayer Resources Marketplace</h3>
+                <p class="feature-description">Sell devotionals, courses, books, and resources with 30% commission
+                    model, creating creator economy.</p>
+                <div class="feature-tags">
+                    <span class="tag">Revenue+</span>
+                    <span class="tag">Creator Platform</span>
+                    <span class="tag">Scalable</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('social-prayer-feed')">
+                <div class="feature-icon">📱</div>
+                <h3 class="feature-title">Social Prayer Feed</h3>
+                <p class="feature-description">Share testimonies, prayer requests, and answered prayers creating viral
+                    community engagement.</p>
+                <div class="feature-tags">
+                    <span class="tag">Viral Growth</span>
+                    <span class="tag">Community</span>
+                    <span class="tag">Engagement+</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('prayer-events')">
+                <div class="feature-icon">📅</div>
+                <h3 class="feature-title">Prayer Events & Conferences</h3>
+                <p class="feature-description">Ticketed virtual and physical events with 20% platform fee, creating
+                    high-value revenue opportunities.</p>
+                <div class="feature-tags">
+                    <span class="tag">Revenue+</span>
+                    <span class="tag">Brand Building</span>
+                    <span class="tag">Community</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('mentorship-program')">
+                <div class="feature-icon">👥</div>
+                <h3 class="feature-title">Prayer Mentorship Program</h3>
+                <p class="feature-description">Connect users with spiritual mentors for 1-on-1 guidance, taking 30%
+                    commission on paid sessions.</p>
+                <div class="feature-tags">
+                    <span class="tag">Premium</span>
+                    <span class="tag">Revenue+</span>
+                    <span class="tag">Retention</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('offline-mode')">
+                <div class="feature-icon">📴</div>
+                <h3 class="feature-title">Enhanced Offline Mode</h3>
+                <p class="feature-description">Download prayers for offline access with smart sync, enabling prayer
+                    anywhere without internet.</p>
+                <div class="feature-tags">
+                    <span class="tag">Accessibility</span>
+                    <span class="tag">Premium Feature</span>
+                    <span class="tag">Global Reach</span>
+                </div>
+            </div>
+
+            <div class="feature-card fade-in" onclick="openModal('prayer-journal')">
+                <div class="feature-icon">📖</div>
+                <h3 class="feature-title">Digital Prayer Journal</h3>
+                <p class="feature-description">Rich media journaling with photos, audio, video, and AI-generated prompts
+                    for deep spiritual reflection.</p>
+                <div class="feature-tags">
+                    <span class="tag">Engagement+</span>
+                    <span class="tag">Premium Export</span>
+                    <span class="tag">Retention</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">×</button>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-subtitle" id="modalSubtitle"></p>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
-</section>
 
-
-<script>
-    const sleepSlider = document.getElementById("sleep");
-    const hrSlider = document.getElementById("hr");
-    const activitySlider = document.getElementById("activity");
-    const stressSlider = document.getElementById("stress");
-
-    const sleepVal = document.getElementById("sleep-val");
-    const hrVal = document.getElementById("hr-val");
-    const activityVal = document.getElementById("activity-val");
-    const stressVal = document.getElementById("stress-val");
-
-    const stateText = document.getElementById("mental-state-text");
-
-    function updateMentalState() {
-        let sleep = parseFloat(sleepSlider.value);
-        let hr = parseInt(hrSlider.value);
-        let activity = parseInt(activitySlider.value);
-        let stress = parseInt(stressSlider.value);
-
-        // Update display values
-        sleepVal.textContent = sleep;
-        hrVal.textContent = hr;
-        activityVal.textContent = activity;
-        stressVal.textContent = stress;
-
-        // Simple scoring logic
-        let score = 0;
-
-        // Sleep contribution (ideal 7–9 hrs)
-        if (sleep >= 7 && sleep <= 9) score += 2;
-        else if (sleep >= 6) score += 1;
-        else score -= 1;
-
-        // Heart rate contribution (ideal 55–75 bpm)
-        if (hr >= 55 && hr <= 75) score += 2;
-        else if (hr < 90) score += 1;
-        else score -= 1;
-
-        // Activity contribution (ideal 5–8)
-        if (activity >= 5 && activity <= 8) score += 2;
-        else if (activity >= 3) score += 1;
-        else score -= 1;
-
-        // Stress contribution (lower better)
-        if (stress <= 3) score += 2;
-        else if (stress <= 6) score += 1;
-        else score -= 1;
-
-        // Determine mental state
-        // Determine mental state
-let state = "Balanced";
-let color = "#4cafef";
-let advice = "";
-
-// Map score to 10 mental states with advice
-if (score >= 8) {
-    state = "Thriving & Energized";
-    color = "#00e676"; // bright green
-    advice = "You're at your best! Keep up healthy habits and maintain balance.";
-} else if (score >= 6) {
-    state = "Calm & Resilient";
-    color = "#66bb6a"; // green
-    advice = "You’re handling stress well. Continue mindfulness or light exercise.";
-} else if (score >= 4) {
-    state = "Positive & Focused";
-    color = "#2196f3"; // blue
-    advice = "Stay productive and take short breaks to avoid fatigue.";
-} else if (score >= 2) {
-    state = "Balanced";
-    color = "#4cafef"; // light blue
-    advice = "You’re in a good place. Maintain regular sleep and activity.";
-} else if (score >= 0) {
-    state = "Slightly Fatigued";
-    color = "#ffb74d"; // orange
-    advice = "Consider a short rest or hydration to recharge energy.";
-} else if (score >= -2) {
-    state = "Tired & Distracted";
-    color = "#ff9800"; // darker orange
-    advice = "Reduce multitasking and allow yourself a proper break.";
-} else if (score >= -4) {
-    state = "Stressed";
-    color = "#f44336"; // red
-    advice = "Practice deep breathing or a quick walk to ease tension.";
-} else if (score >= -6) {
-    state = "Overwhelmed";
-    color = "#d32f2f"; // darker red
-    advice = "Prioritize tasks, seek support, and allow downtime.";
-} else if (score >= -8) {
-    state = "Burnout Risk";
-    color = "#b71c1c"; // deep red
-    advice = "Take extended rest, disconnect from work, and focus on self-care.";
-} else {
-    state = "Critical Distress";
-    color = "#9c27b0"; // purple
-    advice = "Reach out for professional help or support immediately.";
-}
-
-// Update UI
-        stateText.textContent = state;
-        stateText.style.color = color;
-
-        // Show advice under the state
-        let adviceBox = document.getElementById("mental-advice");
-        adviceBox.textContent = advice;
-    }
-
-    // Attach event listeners
-    [sleepSlider, hrSlider, activitySlider, stressSlider].forEach(slider => {
-        slider.addEventListener("input", updateMentalState);
-    });
-
-    // Initialize
-    updateMentalState();
-</script>
-
-
-    <!-- Download Section -->
-    <section id="download" class="download-section">
-        <div class="bg-animation">
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-            <div class="floating-element"></div>
-        </div>
-        <div class="container">
-            <div class="download-content">
-                <h2 class="download-title">Software Requirements Specification</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Download the complete SRS document containing detailed technical specifications, 
-                    literature review, system architecture, and implementation guidelines for the 
-                    Passive Mental Health Monitoring System.
-                </p>
-                <a href="📑 Software Requirements Specification.pdf" class="download-btn" onclick="downloadSRS()">
-                    📄 Download Complete SRS Document
-                </a>
-                <h2 class="download-title">Research Paper</h2>
-                <p style="font-size: 1.2rem; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                    Download the complete Research Paper presenting the study, methodology, experimental results, 
-and analysis that support the development of the Passive Mental Health Monitoring System. 
-This document highlights related work, research gaps, proposed framework, and findings 
-that validate the effectiveness of our mental health counseling chatbot.
-
-                </p>
-                <a href="research.pdf" class="download-btn" onclick="downloadSRS()">
-                    📄 Download Complete Research Document
-                </a>
-                <p style="margin-top: 30px; font-size: 1rem; opacity: 0.8;">
-                    Document includes: Literature Review • System Architecture • API Documentation • 
-                    Security Requirements • Validation Protocols
-                </p>
-            </div>
-            
-        </div>
-        
-    </section>
-
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script>
-        // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Copy code functionality
-        function copyCode(elementId) {
-            const codeElement = document.getElementById(elementId);
-            const textToCopy = codeElement.textContent;
-            
-            navigator.clipboard.writeText(textToCopy).then(function() {
-                // Show feedback
-                const button = codeElement.parentNode.querySelector('.copy-btn');
-                const originalText = button.textContent;
-                button.textContent = 'Copied!';
-                button.style.background = '#4caf50';
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.style.background = '#4caf50';
-                }, 2000);
-            });
-        }
-
-        // Create correlation chart
-        function createCorrelationChart() {
-            const correlationData = [
-                {
-                    z: [
-                        [1.0, 0.72, 0.68, 0.45, 0.58, 0.33],
-                        [0.72, 1.0, 0.85, 0.52, 0.61, 0.41],
-                        [0.68, 0.85, 1.0, 0.48, 0.73, 0.38],
-                        [0.45, 0.52, 0.48, 1.0, 0.55, 0.67],
-                        [0.58, 0.61, 0.73, 0.55, 1.0, 0.44],
-                        [0.33, 0.41, 0.38, 0.67, 0.44, 1.0]
-                    ],
-                    x: ['Sleep Quality', 'Heart Rate', 'Activity Level', 'Phone Usage', 'Location Entropy', 'Social Interaction'],
-                    y: ['Sleep Quality', 'Heart Rate', 'Activity Level', 'Phone Usage', 'Location Entropy', 'Social Interaction'],
-                    type: 'heatmap',
-                    colorscale: [
-                        [0, '#000428'],
-                        [0.5, '#004e92'],
-                        [1, '#009ffd']
-                    ],
-                    showscale: true,
-                    colorbar: {
-                        title: 'Correlation Coefficient',
-                        titlefont: { color: 'white' },
-                        tickfont: { color: 'white' }
-                    }
-                }
-            ];
-
-            const layout = {
-                title: {
-                    text: 'Mental Health Indicators Correlation Matrix',
-                    font: { color: 'white', size: 18 }
-                },
-                xaxis: { 
-                    tickfont: { color: 'white' },
-                    tickangle: 45
-                },
-                yaxis: { 
-                    tickfont: { color: 'white' }
-                },
-                paper_bgcolor: 'rgba(0,0,0,0)',
-                plot_bgcolor: 'rgba(0,0,0,0)',
-                font: { color: 'white' }
-            };
-
-            Plotly.newPlot('correlationChart', correlationData, layout, {responsive: true});
-        }
-
-        // Download SRS function
-        function downloadSRS() {
-            // In a real implementation, this would download the actual SRS PDF
-            alert('SRS document download will be available soon. This will contain the complete technical specification document.');
-            
-            // For demonstration, you could create a placeholder PDF or link to your actual document
-            // window.open('path/to/your/srs-document.pdf', '_blank');
-        }
-
-        // Initialize correlation chart when page loads
-        window.addEventListener('load', function() {
-            createCorrelationChart();
-        });
-
-        // Intersection Observer for animations
+        // Scroll Animation Observer
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1736,44 +911,755 @@ that validate the effectiveness of our mental health counseling chatbot.
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.classList.add('visible');
                 }
             });
         }, observerOptions);
 
-        // Observe elements for animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const animatedElements = document.querySelectorAll('.flow-card, .source-card, .api-card');
-            animatedElements.forEach(el => {
-                observer.observe(el);
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Feature Data
+        const features = {
+            'ai-prayer-assistant': {
+                title: 'AI Prayer Assistant',
+                subtitle: 'Your Personal Prayer Companion Powered by AI',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'User Opens Prayer Assistant',
+                        description: 'User taps on the AI Assistant icon in the app. They can ask questions like "How should I pray for my family?" or "Give me a prayer for strength."'
+                    },
+                    {
+                        title: 'AI Processes Request',
+                        description: 'The AI (using GPT-4 or similar) analyzes the user\'s request, considering their prayer history, preferences, and current spiritual journey stage.'
+                    },
+                    {
+                        title: 'Personalized Response Generated',
+                        description: 'AI generates a customized prayer guide, scripture references, and actionable steps tailored to the user\'s specific situation.'
+                    },
+                    {
+                        title: 'Interactive Conversation',
+                        description: 'User can ask follow-up questions, request clarifications, or dive deeper into specific topics. The AI maintains context throughout the conversation.'
+                    },
+                    {
+                        title: 'Save & Share',
+                        description: 'User can save the AI-generated prayers to their journal, share with prayer groups, or set reminders to revisit the guidance.'
+                    }
+                ],
+                benefits: [
+                    '24/7 spiritual guidance without human intervention',
+                    'Scales infinitely - supports millions of users simultaneously',
+                    'Premium feature: Charge $4.99/month for unlimited AI conversations',
+                    'Reduces support burden on human prayer leaders',
+                    'Increases daily active users by 40-60%',
+                    'Personalization drives deeper engagement and retention'
+                ],
+                implementation: 'Integrate OpenAI API or Google Gemini. Build conversation UI similar to ChatGPT. Store conversation history in database. Implement token-based pricing for premium users.'
+            },
+            'smart-prayer-recommendations': {
+                title: 'Smart Prayer Recommendations',
+                subtitle: 'AI-Powered Personalized Prayer Discovery',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Data Collection',
+                        description: 'System tracks user behavior: completed prayers, prayer categories they engage with, time of day they pray, prayer duration, and topics they skip.'
+                    },
+                    {
+                        title: 'AI Analysis',
+                        description: 'Machine learning model analyzes patterns across all users to identify similar prayer journeys and preferences. Uses collaborative filtering + content-based filtering.'
+                    },
+                    {
+                        title: 'Personalized Recommendations',
+                        description: 'On the home screen, users see "Recommended for You" section with 3-5 prayer programs tailored to their interests and spiritual growth stage.'
+                    },
+                    {
+                        title: 'Smart Notifications',
+                        description: 'Push notifications suggest prayers at optimal times: "Based on your pattern, you usually pray at 7 AM. Here\'s today\'s recommendation."'
+                    },
+                    {
+                        title: 'Continuous Learning',
+                        description: 'As users interact with recommendations, the AI refines its understanding and improves future suggestions.'
+                    }
+                ],
+                benefits: [
+                    'Increases prayer discovery by 3x',
+                    'Reduces decision fatigue - users don\'t have to search',
+                    'Improves retention - users find relevant content faster',
+                    'Drives engagement with underutilized prayer programs',
+                    'Creates personalized experience at scale',
+                    'Can be monetized through sponsored prayer recommendations'
+                ],
+                implementation: 'Build recommendation engine using TensorFlow or PyTorch. Implement collaborative filtering algorithm. Track user interactions in analytics database. Display recommendations in home screen carousel.'
+            },
+            'voice-to-prayer': {
+                title: 'Voice-to-Prayer Conversion',
+                subtitle: 'Speak Your Heart, AI Captures Your Prayers',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'User Activates Voice Mode',
+                        description: 'User taps microphone icon in the prayer journal or "Talk It Over" section. App requests microphone permission if not already granted.'
+                    },
+                    {
+                        title: 'Real-Time Transcription',
+                        description: 'As user speaks their prayer, AI transcribes in real-time using speech-to-text (Google Cloud Speech or Whisper API). Text appears on screen instantly.'
+                    },
+                    {
+                        title: 'AI Enhancement',
+                        description: 'AI automatically formats the prayer, adds punctuation, identifies prayer categories (thanksgiving, petition, intercession), and suggests relevant scripture.'
+                    },
+                    {
+                        title: 'Review & Edit',
+                        description: 'User reviews the transcribed prayer, makes any edits, and can add tags or categories. AI suggests improvements to clarity and structure.'
+                    },
+                    {
+                        title: 'Save & Organize',
+                        description: 'Prayer is saved to user\'s journal with timestamp, audio recording (optional), and AI-generated summary. Can be shared with prayer groups.'
+                    }
+                ],
+                benefits: [
+                    'Accessibility for users who prefer speaking over typing',
+                    'Faster prayer entry - 3x quicker than typing',
+                    'Captures emotional tone through voice analysis',
+                    'Perfect for elderly users or those with disabilities',
+                    'Increases prayer journal usage by 50%+',
+                    'Premium feature: Unlimited voice prayers ($2.99/month)'
+                ],
+                implementation: 'Integrate Google Cloud Speech-to-Text or OpenAI Whisper. Build voice recording UI with waveform visualization. Store audio files in cloud storage. Implement real-time transcription display.'
+            },
+            'sentiment-analysis': {
+                title: 'Prayer Sentiment Analysis',
+                subtitle: 'Understand Your Spiritual Journey Through AI',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Continuous Data Collection',
+                        description: 'As users write prayers, complete prayer programs, and engage with "Talk It Over", the system collects text data (with user consent).'
+                    },
+                    {
+                        title: 'AI Sentiment Processing',
+                        description: 'Natural Language Processing analyzes prayer text to detect emotions: joy, gratitude, anxiety, hope, sadness, peace. Tracks sentiment trends over time.'
+                    },
+                    {
+                        title: 'Insights Dashboard',
+                        description: 'User accesses "My Spiritual Insights" dashboard showing: emotional trends graph, most common prayer themes, spiritual growth indicators, and breakthrough moments.'
+                    },
+                    {
+                        title: 'Personalized Recommendations',
+                        description: 'Based on sentiment analysis, AI suggests: "You\'ve been feeling anxious lately. Try our Peace & Calm prayer series" or "Your gratitude has increased 40% this month!"'
+                    },
+                    {
+                        title: 'Share with Mentor',
+                        description: 'Users can share sentiment reports with their prayer mentors or spiritual leaders for guided support and accountability.'
+                    }
+                ],
+                benefits: [
+                    'Provides tangible evidence of spiritual growth',
+                    'Helps users identify patterns in their prayer life',
+                    'Premium feature worth $9.99/month',
+                    'Increases self-awareness and intentionality',
+                    'Creates data-driven spiritual guidance',
+                    'Differentiates app from competitors'
+                ],
+                implementation: 'Use Google Cloud Natural Language API or Hugging Face transformers. Build analytics dashboard with Chart.js. Store sentiment scores in time-series database. Implement privacy controls and data encryption.'
+            },
+            'ai-translation': {
+                title: 'AI Multi-Language Translation',
+                subtitle: 'Break Language Barriers in Prayer',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'User Selects Language',
+                        description: 'In prayer details screen, user taps language dropdown (currently supports English, Telugu, Tamil, Malayalam). New feature adds 100+ languages.'
+                    },
+                    {
+                        title: 'AI Real-Time Translation',
+                        description: 'AI translates prayer content on-the-fly using neural machine translation. Maintains spiritual context and cultural nuances specific to religious text.'
+                    },
+                    {
+                        title: 'Quality Assurance',
+                        description: 'For major languages, translations are verified by human reviewers. AI learns from corrections to improve future translations.'
+                    },
+                    {
+                        title: 'Community Contributions',
+                        description: 'Users can suggest better translations. AI aggregates community feedback to refine translations over time.'
+                    },
+                    {
+                        title: 'Offline Translation',
+                        description: 'Premium users can download language packs for offline translation, enabling prayer access anywhere without internet.'
+                    }
+                ],
+                benefits: [
+                    'Expands global reach to 100+ countries',
+                    'Makes app accessible to non-English speakers',
+                    'Increases user base by 5-10x potential',
+                    'Enables cross-cultural prayer communities',
+                    'Premium feature: Advanced languages ($1.99/month)',
+                    'Positions app as truly global prayer platform'
+                ],
+                implementation: 'Integrate Google Cloud Translation API or DeepL. Build language selection UI. Cache translations to reduce API costs. Implement offline translation using TensorFlow Lite models.'
+            },
+            'prayer-insights': {
+                title: 'AI Prayer Insights Dashboard',
+                subtitle: 'Data-Driven Spiritual Growth Tracking',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Automated Data Tracking',
+                        description: 'System tracks: prayers completed, time spent praying, prayer categories, consistency streaks, scripture readings, and "Talk It Over" participation.'
+                    },
+                    {
+                        title: 'AI Analysis Engine',
+                        description: 'Machine learning analyzes patterns: optimal prayer times, most engaging prayer types, spiritual growth trajectory, and areas needing attention.'
+                    },
+                    {
+                        title: 'Visual Dashboard',
+                        description: 'Beautiful dashboard shows: weekly/monthly prayer stats, growth charts, achievement badges, comparison with past periods, and personalized insights.'
+                    },
+                    {
+                        title: 'AI-Generated Reports',
+                        description: 'Monthly AI-generated report: "This month you prayed 23 times, focused on family prayers, and showed 35% increase in consistency. Suggested focus: Intercession prayers."'
+                    },
+                    {
+                        title: 'Goal Setting & Tracking',
+                        description: 'AI suggests realistic prayer goals based on user\'s history. Tracks progress and sends encouraging notifications when milestones are reached.'
+                    }
+                ],
+                benefits: [
+                    'Gamifies spiritual growth with data',
+                    'Increases accountability and consistency',
+                    'Premium feature: $6.99/month for full insights',
+                    'Provides motivation through visible progress',
+                    'Helps users identify spiritual blind spots',
+                    'Creates habit-forming engagement loop'
+                ],
+                implementation: 'Build analytics dashboard with React Native Charts. Store metrics in PostgreSQL with time-series optimization. Use Python for ML analysis. Implement push notifications for insights.'
+            },
+            'smart-reminders': {
+                title: 'Intelligent Prayer Reminders',
+                subtitle: 'AI Learns Your Perfect Prayer Schedule',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Initial Learning Phase',
+                        description: 'For first 2 weeks, system tracks when users naturally pray: time of day, day of week, location patterns, and which prayers they complete.'
+                    },
+                    {
+                        title: 'Pattern Recognition',
+                        description: 'AI identifies patterns: "User prays most consistently at 7 AM on weekdays" or "User engages more with evening prayers on Sundays."'
+                    },
+                    {
+                        title: 'Smart Scheduling',
+                        description: 'Instead of generic daily reminders, AI sends notifications at optimal times when user is most likely to engage. Adapts to changing schedules.'
+                    },
+                    {
+                        title: 'Context-Aware Notifications',
+                        description: 'AI considers: user\'s location (don\'t remind during commute), phone usage patterns (remind when phone is active), and recent prayer history.'
+                    },
+                    {
+                        title: 'Continuous Optimization',
+                        description: 'System tracks which reminders lead to prayer completion. Adjusts timing and frequency to maximize engagement without being annoying.'
+                    }
+                ],
+                benefits: [
+                    'Increases prayer completion rate by 60%+',
+                    'Reduces notification fatigue and annoyance',
+                    'Respects user\'s natural rhythms and schedule',
+                    'Improves retention through timely engagement',
+                    'Differentiates from basic calendar reminders',
+                    'Creates personalized experience at scale'
+                ],
+                implementation: 'Build ML model using user behavior data. Implement smart notification scheduling logic. Use device sensors for context awareness. Store user patterns in database. A/B test notification strategies.'
+            },
+            'ai-content-generation': {
+                title: 'AI Prayer Content Generator',
+                subtitle: 'Scale Content Creation with AI',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Admin Defines Prayer Theme',
+                        description: 'Admin enters prayer topic (e.g., "30 Days of Gratitude"), target audience, scripture references, and desired prayer style.'
+                    },
+                    {
+                        title: 'AI Generates Prayer Series',
+                        description: 'AI creates complete 30-day prayer program: daily prayers, scripture readings, reflection questions, and "Talk It Over" prompts. Maintains theological accuracy.'
+                    },
+                    {
+                        title: 'Human Review & Editing',
+                        description: 'Spiritual leaders review AI-generated content, make theological corrections, and approve for publication. AI learns from edits.'
+                    },
+                    {
+                        title: 'Multi-Language Generation',
+                        description: 'AI automatically translates approved content into all supported languages, maintaining spiritual context and cultural appropriateness.'
+                    },
+                    {
+                        title: 'Continuous Improvement',
+                        description: 'AI analyzes which generated prayers get highest engagement. Refines content generation based on user preferences and completion rates.'
+                    }
+                ],
+                benefits: [
+                    'Reduces content creation time by 80%',
+                    'Enables rapid scaling of prayer programs',
+                    'Maintains consistent quality across content',
+                    'Frees up human leaders for strategic work',
+                    'Supports multiple languages simultaneously',
+                    'Enables personalized prayer paths for each user'
+                ],
+                implementation: 'Use GPT-4 API for content generation. Build admin interface for content review. Implement version control for edits. Store generated content in CMS. Add theological safety filters.'
+            },
+            'premium-subscription': {
+                title: 'Premium Subscription Tiers',
+                subtitle: 'Unlock Exclusive Spiritual Growth Features',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Free Tier (Current)',
+                        description: 'Users access basic prayers, limited "Talk It Over", standard reminders, and community features. This remains free forever to maintain accessibility.'
+                    },
+                    {
+                        title: 'Premium Tier ($9.99/month)',
+                        description: 'Unlocks: AI Prayer Assistant, unlimited voice prayers, advanced insights dashboard, offline mode, ad-free experience, and priority support.'
+                    },
+                    {
+                        title: 'Premium Plus ($19.99/month)',
+                        description: 'Everything in Premium + personal prayer mentor, exclusive prayer series, virtual prayer room access, downloadable resources, and family sharing (5 accounts).'
+                    },
+                    {
+                        title: 'Upgrade Prompts',
+                        description: 'Strategic prompts: "Unlock AI insights to track your spiritual growth" or "Get personalized prayer guidance with Premium." Non-intrusive, value-focused.'
+                    },
+                    {
+                        title: 'Free Trial & Conversion',
+                        description: '14-day free trial for Premium. After trial, gentle reminders of features they\'ll lose. Offer annual plan at 20% discount ($99/year).'
+                    }
+                ],
+                benefits: [
+                    'Direct recurring revenue stream',
+                    'If 5% of users convert at $9.99/month = significant revenue',
+                    'Premium users are more engaged and retained',
+                    'Funds continued app development',
+                    'Maintains free tier for accessibility',
+                    'Creates sustainable business model'
+                ],
+                implementation: 'Integrate RevenueCat or Stripe for subscriptions. Build paywall UI. Implement feature gating logic. Add subscription management in user profile. Track conversion metrics.'
+            },
+            'virtual-prayer-rooms': {
+                title: 'Virtual Prayer Rooms',
+                subtitle: 'Live Video Prayer Communities',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'User Creates/Joins Room',
+                        description: 'Users can create private prayer rooms for their group or join public rooms. Set schedule, topic, and capacity (5-50 people).'
+                    },
+                    {
+                        title: 'Video Connection',
+                        description: 'At scheduled time, users join via video call (using Agora or Twilio). See other participants, share prayer requests, and pray together in real-time.'
+                    },
+                    {
+                        title: 'Interactive Features',
+                        description: 'During session: shared prayer list, live chat, raise hand to speak, background music, screen sharing for scripture, and prayer request submission.'
+                    },
+                    {
+                        title: 'Recording & Replay',
+                        description: 'Premium feature: Record sessions for those who couldn\'t attend. Auto-generate prayer highlights and key moments using AI.'
+                    },
+                    {
+                        title: 'Post-Session Engagement',
+                        description: 'After session: shared notes, prayer request follow-ups, testimonies sharing, and scheduling next meeting. Builds ongoing community.'
+                    }
+                ],
+                benefits: [
+                    'Creates deep community engagement',
+                    'Premium feature: Host unlimited rooms ($14.99/month)',
+                    'Increases daily active users significantly',
+                    'Enables global prayer connections',
+                    'Drives word-of-mouth growth',
+                    'Can host paid prayer events/conferences'
+                ],
+                implementation: 'Integrate Agora SDK for video. Build room management UI. Implement scheduling system. Add recording functionality. Create moderation tools for room hosts.'
+            },
+            'prayer-challenges': {
+                title: 'Prayer Challenges & Gamification',
+                subtitle: 'Make Prayer Engaging Through Friendly Competition',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Challenge Creation',
+                        description: 'App launches monthly challenges: "30 Days of Gratitude", "Pray for 7 Nations", "Scripture Memory Challenge". Users can create custom challenges for their groups.'
+                    },
+                    {
+                        title: 'Participation & Tracking',
+                        description: 'Users join challenges, complete daily tasks, and track progress. System auto-detects completion (e.g., finished gratitude prayer = day complete).'
+                    },
+                    {
+                        title: 'Streaks & Badges',
+                        description: 'Earn badges: "7-Day Streak", "Early Bird Pray-er", "Scripture Master". Maintain prayer streaks with visual indicators. Lose streak if miss 2 consecutive days.'
+                    },
+                    {
+                        title: 'Leaderboards',
+                        description: 'Friendly leaderboards: global, friends, and church groups. Show top participants, longest streaks, and most engaged pray-ers. Optional anonymity.'
+                    },
+                    {
+                        title: 'Rewards & Recognition',
+                        description: 'Complete challenges to unlock: exclusive prayer content, profile badges, special themes, and recognition in community. Premium users get bonus rewards.'
+                    }
+                ],
+                benefits: [
+                    'Increases engagement by 3-5x',
+                    'Creates viral sharing opportunities',
+                    'Builds habit-forming prayer routines',
+                    'Encourages friendly accountability',
+                    'Drives social sharing and app downloads',
+                    'Can partner with churches for sponsored challenges'
+                ],
+                implementation: 'Build challenge system with progress tracking. Create badge/achievement database. Implement leaderboard with Redis. Design gamification UI. Add social sharing for achievements.'
+            },
+            'donation-integration': {
+                title: 'Integrated Donation System',
+                subtitle: 'Connect Prayer with Charitable Giving',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Prayer-Linked Causes',
+                        description: 'Each prayer program can link to a cause: "Pray for Orphans" links to orphanage donations, "Disaster Relief Prayers" links to emergency funds.'
+                    },
+                    {
+                        title: 'In-App Donation Flow',
+                        description: 'After completing prayer, users see: "You prayed for orphans. Support with a donation?" One-tap donation via Stripe/PayPal. Amounts: $5, $10, $25, custom.'
+                    },
+                    {
+                        title: 'Transparency Dashboard',
+                        description: 'Users see: total donated, causes supported, impact reports (e.g., "Your donations fed 50 children this month"). Builds trust and encourages recurring giving.'
+                    },
+                    {
+                        title: 'Recurring Donations',
+                        description: 'Option to set up monthly recurring donations to favorite causes. Get exclusive prayer content for that cause and impact updates.'
+                    },
+                    {
+                        title: 'Revenue Model',
+                        description: 'App takes 5-10% platform fee from donations to cover costs and fund development. Transparent about fee. Partner with verified nonprofits.'
+                    }
+                ],
+                benefits: [
+                    'Creates meaningful revenue stream (5-10% of donations)',
+                    'Aligns prayer with action - powerful combination',
+                    'Attracts nonprofit partnerships',
+                    'Increases user satisfaction and purpose',
+                    'Differentiates from other prayer apps',
+                    'Potential for millions in donation flow'
+                ],
+                implementation: 'Integrate Stripe Connect for payments. Build donation UI. Partner with verified nonprofits. Implement impact tracking dashboard. Add tax receipt generation.'
+            },
+            'prayer-marketplace': {
+                title: 'Prayer Resources Marketplace',
+                subtitle: 'Monetize Through Digital Products',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Marketplace Launch',
+                        description: 'Create in-app store selling: prayer books (PDF/ePub), devotional courses, guided meditation audio, worship music, and prayer journals.'
+                    },
+                    {
+                        title: 'Creator Platform',
+                        description: 'Allow spiritual leaders, authors, and content creators to sell their resources. App takes 30% commission. Creators get 70%. Vetting process ensures quality.'
+                    },
+                    {
+                        title: 'Discovery & Purchase',
+                        description: 'Users browse marketplace, read reviews, preview content, and purchase with one tap. Instant digital delivery. Purchases tied to account, accessible across devices.'
+                    },
+                    {
+                        title: 'Personalized Recommendations',
+                        description: 'AI recommends resources based on user\'s prayer history: "You\'ve been praying for peace. Check out this Peace & Calm devotional course."'
+                    },
+                    {
+                        title: 'Bundles & Subscriptions',
+                        description: 'Offer resource bundles at discount. Premium subscribers get 20% off all marketplace items. Monthly resource subscription: $4.99 for 2 new resources.'
+                    }
+                ],
+                benefits: [
+                    'Direct revenue: 30% commission on all sales',
+                    'Attracts content creators to platform',
+                    'Provides value beyond free prayers',
+                    'Scales infinitely with digital products',
+                    'Creates ecosystem around prayer',
+                    'Potential for $100K+ monthly revenue'
+                ],
+                implementation: 'Build marketplace UI. Integrate payment processing. Create creator dashboard. Implement digital rights management. Add review/rating system. Build recommendation engine.'
+            },
+            'social-prayer-feed': {
+                title: 'Social Prayer Feed',
+                subtitle: 'Share Testimonies & Build Community',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'User Creates Post',
+                        description: 'After completing prayer, user can share: testimony, answered prayer, prayer request, or spiritual insight. Add text, images, or video. Choose privacy: public, friends, or prayer group.'
+                    },
+                    {
+                        title: 'Community Engagement',
+                        description: 'Other users see posts in their feed, can "Pray for This" (like), comment with encouragement, or share to their groups. Creates supportive community.'
+                    },
+                    {
+                        title: 'Prayer Request Board',
+                        description: 'Dedicated section for prayer requests. Users post needs, others commit to pray. Track how many people prayed for each request. Send thank you when answered.'
+                    },
+                    {
+                        title: 'Testimony Highlights',
+                        description: 'AI identifies inspiring testimonies and features them on "Testimony of the Day". Encourages others and builds faith. Users can save favorite testimonies.'
+                    },
+                    {
+                        title: 'Moderation & Safety',
+                        description: 'AI + human moderation ensures appropriate content. Report system for inappropriate posts. Community guidelines clearly stated. Safe, uplifting environment.'
+                    }
+                ],
+                benefits: [
+                    'Increases daily app opens by 2-3x',
+                    'Creates viral sharing opportunities',
+                    'Builds strong community bonds',
+                    'Provides social proof and encouragement',
+                    'Drives organic growth through sharing',
+                    'Can monetize through sponsored posts (churches/ministries)'
+                ],
+                implementation: 'Build social feed UI similar to Instagram. Implement post creation with media upload. Add like/comment/share functionality. Build moderation system. Create notification system for interactions.'
+            },
+            'prayer-events': {
+                title: 'Prayer Events & Conferences',
+                subtitle: 'Monetize Through Virtual & Physical Events',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Event Creation',
+                        description: 'Churches, ministries, or app can create events: virtual prayer conferences, worship nights, teaching sessions, or prayer summits. Set date, time, capacity, and ticket price.'
+                    },
+                    {
+                        title: 'Ticket Sales',
+                        description: 'Users browse upcoming events, watch preview videos, and purchase tickets ($5-$50 depending on event). Secure payment processing. Instant ticket delivery via email.'
+                    },
+                    {
+                        title: 'Event Experience',
+                        description: 'Virtual events: live streaming, interactive chat, breakout prayer rooms, Q&A with speakers. Physical events: QR code check-in, event app features, networking.'
+                    },
+                    {
+                        title: 'Recording Access',
+                        description: 'Ticket holders get access to event recordings for 30 days. Can purchase permanent access for additional fee. Transcripts and resources provided.'
+                    },
+                    {
+                        title: 'Revenue Sharing',
+                        description: 'App takes 20% of ticket sales for platform fees. Event organizers get 80%. App can host own events for 100% revenue.'
+                    }
+                ],
+                benefits: [
+                    'High-margin revenue stream (20% of ticket sales)',
+                    'Attracts churches and ministries to platform',
+                    'Creates buzz and drives app downloads',
+                    'Positions app as event platform',
+                    'Potential for $50K+ per major event',
+                    'Builds brand authority and trust'
+                ],
+                implementation: 'Build event management system. Integrate ticketing with Stripe. Create live streaming infrastructure (Agora/Twilio). Build event discovery UI. Implement QR code check-in system.'
+            },
+            'mentorship-program': {
+                title: 'Prayer Mentorship Program',
+                subtitle: 'Connect Seekers with Spiritual Guides',
+                revenue: true,
+                flow: [
+                    {
+                        title: 'Mentor Onboarding',
+                        description: 'Verified spiritual leaders, pastors, and mature believers apply to become mentors. Vetting process includes background check, references, and interview. Set availability and expertise areas.'
+                    },
+                    {
+                        title: 'Mentee Matching',
+                        description: 'Users seeking guidance fill out profile: spiritual goals, challenges, preferences. AI matches with compatible mentor based on expertise, personality, and availability.'
+                    },
+                    {
+                        title: 'Mentorship Sessions',
+                        description: 'Scheduled 1-on-1 video calls (30-60 min). Mentor provides prayer guidance, accountability, and spiritual direction. In-app messaging between sessions for quick questions.'
+                    },
+                    {
+                        title: 'Progress Tracking',
+                        description: 'Mentor and mentee set goals together. Track progress over time. Mentee completes reflection exercises. Mentor provides feedback and encouragement.'
+                    },
+                    {
+                        title: 'Pricing Model',
+                        description: 'Premium Plus subscribers get 1 free session/month. Additional sessions: $29-$99 per session depending on mentor. Mentors set own rates. App takes 30% commission.'
+                    }
+                ],
+                benefits: [
+                    'Premium feature driving subscription upgrades',
+                    '30% commission on paid mentorship sessions',
+                    'Increases user retention dramatically',
+                    'Provides real human connection and support',
+                    'Attracts spiritual leaders to platform',
+                    'Differentiates from automated apps'
+                ],
+                implementation: 'Build mentor profile system. Create matching algorithm. Implement video call scheduling. Add messaging functionality. Build payment processing for sessions. Create mentor dashboard.'
+            },
+            'offline-mode': {
+                title: 'Enhanced Offline Mode',
+                subtitle: 'Pray Anywhere, Even Without Internet',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Content Download',
+                        description: 'Users select prayer programs to download for offline access. Download includes: all prayers, scriptures, images, and audio (if available). Smart download estimates storage needed.'
+                    },
+                    {
+                        title: 'Offline Prayer Experience',
+                        description: 'When offline, users can access downloaded prayers with full functionality: read prayers, mark as complete, add notes, and use timer. UI indicates offline mode.'
+                    },
+                    {
+                        title: 'Local Data Storage',
+                        description: 'All prayer completions, notes, and progress saved locally on device. Encrypted for privacy. Syncs automatically when internet connection restored.'
+                    },
+                    {
+                        title: 'Smart Sync',
+                        description: 'When back online, app syncs: prayer completions, journal entries, and progress. Conflict resolution if same prayer edited offline and online. User chooses which to keep.'
+                    },
+                    {
+                        title: 'Premium Offline Features',
+                        description: 'Free users: Download 3 prayer programs. Premium users: Unlimited downloads, offline AI insights (cached), and offline voice-to-text (on-device processing).'
+                    }
+                ],
+                benefits: [
+                    'Enables prayer in low-connectivity areas',
+                    'Perfect for travel, rural areas, or data-limited users',
+                    'Increases accessibility globally',
+                    'Premium feature drives subscriptions',
+                    'Reduces server load for downloaded content',
+                    'Improves user experience and satisfaction'
+                ],
+                implementation: 'Implement local database (SQLite/Realm). Build download manager with progress tracking. Create sync engine for conflict resolution. Add offline detection logic. Optimize storage with compression.'
+            },
+            'prayer-journal': {
+                title: 'Digital Prayer Journal',
+                subtitle: 'Document Your Spiritual Journey',
+                revenue: false,
+                flow: [
+                    {
+                        title: 'Journal Entry Creation',
+                        description: 'Users create journal entries: free-form text, voice notes, photos, or videos. Tag entries with emotions, prayer topics, or scripture references. Set privacy level.'
+                    },
+                    {
+                        title: 'Rich Media Support',
+                        description: 'Add multiple photos, record audio reflections, or attach video testimonies. Draw or sketch spiritual insights. Attach relevant prayers or scripture passages.'
+                    },
+                    {
+                        title: 'Organization & Search',
+                        description: 'Organize entries by date, tags, or custom categories. Powerful search: find entries by keyword, date range, or emotion. AI suggests related past entries.'
+                    },
+                    {
+                        title: 'Reflection Prompts',
+                        description: 'AI generates daily reflection prompts: "What are you grateful for today?" or "How did you see God at work this week?" Encourages consistent journaling.'
+                    },
+                    {
+                        title: 'Export & Backup',
+                        description: 'Premium feature: Export journal as PDF or ePub book. Cloud backup ensures entries never lost. Share selected entries with mentor or prayer group.'
+                    }
+                ],
+                benefits: [
+                    'Increases daily engagement significantly',
+                    'Creates emotional attachment to app',
+                    'Provides value beyond prayer programs',
+                    'Premium feature: Unlimited entries & export',
+                    'Encourages long-term retention',
+                    'Builds comprehensive spiritual growth record'
+                ],
+                implementation: 'Build rich text editor with media support. Implement tagging system. Create search functionality with Elasticsearch. Add cloud storage for media. Build PDF export feature.'
+            }
+        };
+
+        function showTab(tab) {
+            const aiFeatures = document.getElementById('ai-features');
+            const otherFeatures = document.getElementById('other-features');
+            const tabs = document.querySelectorAll('.tab-btn');
+
+            tabs.forEach(t => t.classList.remove('active'));
+
+            if (tab === 'ai') {
+                aiFeatures.classList.remove('hidden');
+                otherFeatures.classList.add('hidden');
+                tabs[0].classList.add('active');
+            } else {
+                aiFeatures.classList.add('hidden');
+                otherFeatures.classList.remove('hidden');
+                tabs[1].classList.add('active');
+            }
+        }
+
+        function openModal(featureId) {
+            const feature = features[featureId];
+            const modal = document.getElementById('modal');
+            const modalBody = document.getElementById('modal-body');
+
+            let flowHTML = '';
+            feature.flow.forEach((step, index) => {
+                flowHTML += `
+                    <div class="flow-step">
+                        <span class="step-number">${index + 1}</span>
+                        <div class="step-content">
+                            <div class="step-title">${step.title}</div>
+                            <div class="step-description">${step.description}</div>
+                        </div>
+                    </div>
+                `;
             });
+
+            let benefitsHTML = '';
+            feature.benefits.forEach(benefit => {
+                benefitsHTML += `<li>${benefit}</li>`;
+            });
+
+            modalBody.innerHTML = `
+                <div class="modal-header">
+                    <h1 class="modal-title">${feature.title}</h1>
+                    <p class="modal-subtitle">${feature.subtitle}</p>
+                    ${feature.revenue ? '<div class="revenue-tag">💰 Revenue Generator</div>' : ''}
+                </div>
+
+                <div class="flow-section">
+                    <h2 class="flow-title">📋 How It Works - Step by Step</h2>
+                    ${flowHTML}
+                </div>
+
+                <div class="benefits-list">
+                    <h3>✨ Key Benefits & Impact</h3>
+                    <ul>${benefitsHTML}</ul>
+                </div>
+
+                ${feature.implementation ? `
+                    <div class="flow-section">
+                        <h2 class="flow-title">🛠️ Technical Implementation</h2>
+                        <div class="flow-step">
+                            <div class="step-description">${feature.implementation}</div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
         });
 
-        // Add parallax effect to floating elements
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.floating-element');
-            
-            parallax.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
-
-        // Add hover effects to cards
-        document.querySelectorAll('.flow-card, .source-card, .api-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-                this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.3)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.1)';
-            });
+        // Close modal with Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
         });
     </script>
-    
 </body>
+
 </html>
